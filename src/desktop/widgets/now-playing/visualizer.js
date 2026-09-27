@@ -1,6 +1,6 @@
 import Cairo from 'cairo';
 import Gtk from 'gi://Gtk?version=4.0';
-import Gio from 'gi://Gio';
+import {AudioCapture} from './audioCapture.js';
 import GLib from 'gi://GLib';
 import Gdk from 'gi://Gdk?version=4.0';
 
@@ -10,7 +10,7 @@ export function visualizer(context) {
     const updateRate = Math.max(10, Math.min(60, Number(options.visualizerUpdateRate) || 60));
     const area = new Gtk.DrawingArea({height_request: Math.max(20, Math.min(120, Number(options.visualizerHeight) || 40)), hexpand: true});
     const color = new Gdk.RGBA(); color.parse(options.visualizerColor || '#ffffff');
-    let values = Array(count).fill(0), target = [...values], process = null, cancel = null, generation = 0, disposed = false, playerKey = '';
+    let values = Array(count).fill(0), target = [...values], capture = null, disposed = false, playerKey = '';
     const artworkColor = new Gdk.RGBA();
     let hasArtworkColor = false, lastFrame = 0, lastAudio = 0, gradient = null, gradientHeight = -1;
     area.set_draw_func((_area, cr, width, height) => {
@@ -32,44 +32,17 @@ export function visualizer(context) {
         cr.fill();
     });
     const stop = () => {
-        generation++; cancel?.cancel(); cancel = null;
-        // SIGTERM lets the helper close its parec child as well.
-        process?.send_signal(15); process = null; target = Array(count).fill(0);
+        capture?.destroy(); capture = null; target = Array(count).fill(0);
     };
     const start = player => {
-        if (process || disposed) return;
-        if (!GLib.find_program_in_path('pactl') || !GLib.find_program_in_path('parec') || !GLib.find_program_in_path('python3')) {
-            area.tooltip_text = 'Audio visualizer requires pactl, parec and Python 3'; return;
+        if (capture || disposed) return;
+        if (!GLib.find_program_in_path('pactl') || !GLib.find_program_in_path('parec')) {
+            area.tooltip_text = 'Audio visualizer requires pactl and parec'; return;
         }
-        const ticket = ++generation;
-        const helper = Gio.File.new_for_uri(import.meta.url).get_parent().get_child('spectrum.py').get_path();
-        try {
-            process = Gio.Subprocess.new(['python3', helper, String(count), JSON.stringify({name: player.name, pid: player.pid, Identity: player.Identity, DesktopEntry: player.DesktopEntry}), String(Math.max(25, Math.min(300, Number(options.visualizerSensitivity) || 100)) / 100), String(updateRate)], Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
-            const child = process; cancel = new Gio.Cancellable();
-            const stream = new Gio.DataInputStream({base_stream: child.get_stdout_pipe()});
-            const read = () => stream.read_line_async(0, cancel, (source, result) => {
-                try {
-                    const [line] = source.read_line_finish_utf8(result);
-                    if (disposed || ticket !== generation) return;
-                    if (line === null) { target = Array(count).fill(0); area.tooltip_text = 'Player audio capture stopped'; return; }
-                    const data = JSON.parse(line);
-                    if (Array.isArray(data.levels) && data.levels.length === count && data.levels.every(Number.isFinite)) {
-                        const now = GLib.get_monotonic_time() / 1e6;
-                        if (Number.isFinite(data.time) && now - data.time < 0.25) {
-                            target = data.levels;
-                            lastAudio = now;
-                        }
-                    }
-                    else if (data.status) { area.tooltip_text = data.status; target = Array(count).fill(0); }
-                    read();
-                } catch { /* Cancellation and source shutdown are normal. */ }
-            });
-            child.wait_async(null, (p, result) => {
-                try { p.wait_finish(result); } catch { /* Process was already stopped. */ }
-                if (ticket === generation) { process = null; target = Array(count).fill(0); }
-            });
-            area.tooltip_text = 'Waiting for selected app audio'; read();
-        } catch { process = null; area.tooltip_text = 'Audio visualizer could not start'; }
+        capture = new AudioCapture(player, count,
+            Math.max(25, Math.min(300, Number(options.visualizerSensitivity) || 100)) / 100, updateRate,
+            (data, time) => { target = data; lastAudio = time; },
+            status => { area.tooltip_text = status; });
     };
     const tick = area.add_tick_callback((_widget, clock) => {
         const now = clock.get_frame_time() / 1e6;

@@ -10,7 +10,10 @@
     "build": "node scripts/build.mjs --clean && pnpm generate && tsc && node scripts/build.mjs",
     "test": "pnpm build && tsc -p tsconfig.tests.json && node scripts/test.mjs",
     "pack": "bash scripts/package.sh",
-    "test:shell": "pnpm build && bash scripts/test-shell.sh"
+    "test:shell": "pnpm build && bash scripts/test-shell.sh",
+    "test:tiling": "pnpm build && bash scripts/test-shell.sh \"$PWD/tests/snapping-shell-smoke.js\"",
+    "build:native": "python3 scripts/build-native.py",
+    "pack:local": "LUNA_PACKAGE_NATIVE=1 bash scripts/package.sh /tmp/luna-desktop-local-build"
   },
   "devDependencies": {
     "@girs/adw-1": "^4.9.0",

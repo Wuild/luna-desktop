@@ -13,7 +13,7 @@ export function create(context) {
     const {options} = context;
     const box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 10, valign: Gtk.Align.CENTER, vexpand: true});
     const label = () => { const item = new Gtk.Label({xalign: 0, ellipsize: Pango.EllipsizeMode.END, hexpand: true}); applyTextStyle(item, options); return item; };
-    const header = new Gtk.Box({spacing: 6});
+    const header = new Gtk.Box({spacing: 6, visible: options.showApp !== false});
     const appIcon = new Gtk.Image({icon_name: 'audio-x-generic-symbolic', pixel_size: 16});
     const identity = label(); identity.label = 'Now Playing'; header.append(appIcon); header.append(identity);
     const row = new Gtk.Box({spacing: 12});
@@ -52,7 +52,18 @@ export function create(context) {
     }
     box.append(header); box.append(row); box.append(controls);
     const spectrum = options.showVisualizer === true ? visualizer(context) : null;
-    if (spectrum) box.append(spectrum.area);
+    let widget = box;
+    if (spectrum && options.visualizerPlacement === 'background') {
+        // Measure the foreground while drawing the spectrum behind the whole card.
+        widget = new Gtk.Overlay({hexpand: true, vexpand: true});
+        spectrum.area.height_request = 0;
+        spectrum.area.vexpand = true;
+        spectrum.area.can_target = false;
+        spectrum.area.opacity = 0.35;
+        widget.set_child(spectrum.area);
+        widget.add_overlay(box);
+        widget.set_measure_overlay(box, true);
+    } else if (spectrum) box.append(spectrum.area);
     box.append(status);
     const loadArt = async url => {
         const ticket = ++artTicket;
@@ -90,7 +101,7 @@ export function create(context) {
             context.setVisible?.(options.hideWhenIdle !== true || selected?.PlaybackStatus === 'Playing');
             spectrum?.setPlayer(selected);
             const metadata = selected?.Metadata ?? {};
-            identity.label = selected?.Identity ?? 'Now Playing';
+            identity.label = selected?.Identity || selected?.DesktopEntry || 'Now Playing';
             const desktop = String(selected?.DesktopEntry ?? '');
             const app = desktop ? Gio.DesktopAppInfo.new(desktop.endsWith('.desktop') ? desktop : `${desktop}.desktop`) : null;
             appIcon.gicon = app?.get_icon() ?? Gio.ThemedIcon.new('audio-x-generic-symbolic');
@@ -110,5 +121,5 @@ export function create(context) {
     title.label = 'Nothing playing';
     context.setVisible?.(options.hideWhenIdle !== true);
     update(); context.every(2000, update);
-    return box;
+    return widget;
 }

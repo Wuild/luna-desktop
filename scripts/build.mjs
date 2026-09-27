@@ -1,9 +1,11 @@
-import {cp, mkdir, readdir, rm, writeFile} from 'node:fs/promises';
+import {cp, mkdir, readdir, readFile, rm, writeFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
+import os from 'node:os';
 const root = fileURLToPath(new URL('../', import.meta.url));
-const dist = path.join(root, 'dist');
+const dist = process.env.LUNA_BUILD_DIR || path.join(root, 'dist');
 if (process.argv.includes('--clean')) await rm(dist, {recursive: true, force: true});
 else {
     await mkdir(dist, {recursive: true});
@@ -20,7 +22,20 @@ else {
         }
     }
     await assets('');
+    const nativeRoot = path.join(root, 'native/build');
+    try {
+        const manifest = JSON.parse(await readFile(path.join(nativeRoot, 'build.json'), 'utf8'));
+        const hash = createHash('sha256');
+        for (const file of ['native/luna-tiling.h', 'native/luna-tiling.c', 'scripts/build-native.py']) hash.update(await readFile(path.join(root, file)));
+        if (manifest.sourceHash === hash.digest('hex') && manifest.meta === '18' && manifest.architecture === os.machine()) {
+            await mkdir(path.join(dist, 'native'), {recursive: true});
+            for (const file of ['libluna-tiling.so', 'LunaTiling-1.0.typelib', 'build.json'])
+                await cp(path.join(nativeRoot, file), path.join(dist, 'native', file));
+        } else console.warn('Native tiling bridge is stale; run pnpm build:native to rebuild it.');
+    } catch (error) {
+        if (error.code !== 'ENOENT') throw error;
+    }
     execFileSync('glib-compile-schemas', ['--strict', path.join(dist, 'schemas')], {stdio: 'inherit'});
     await writeFile(path.join(dist, 'package.json'), JSON.stringify({type: 'module'}));
-    console.log('Built Luna - Desktop in dist/');
+    console.log(`Built Luna - Desktop in ${dist}`);
 }

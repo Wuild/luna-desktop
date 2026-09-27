@@ -170,7 +170,8 @@ export class DesktopController {
     _stop() {
         const process = this._process;
         this._process = this._client = null;
-        process?.force_exit();
+        // Let GTK shutdown dispose widgets and terminate their audio children.
+        process?.send_signal(15);
         for (const window of this._windows.keys()) this._forget(window);
     }
     destroy() {

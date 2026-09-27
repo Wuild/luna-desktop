@@ -26,6 +26,12 @@
       "default": ""
     },
     {
+      "key": "showApp",
+      "label": "Show playing app name and icon",
+      "type": "boolean",
+      "default": true
+    },
+    {
       "key": "showArtwork",
       "label": "Show album artwork",
       "type": "boolean",
@@ -92,6 +98,23 @@
       "default": false
     },
     {
+      "key": "visualizerPlacement",
+      "label": "Visualizer placement",
+      "type": "choice",
+      "default": "below",
+      "category": "Layout",
+      "choices": [
+        {
+          "label": "Below track details",
+          "value": "below"
+        },
+        {
+          "label": "Widget background",
+          "value": "background"
+        }
+      ]
+    },
+    {
       "key": "visualizerUpdateRate",
       "label": "Visualizer updates per second",
       "type": "number",
@@ -132,7 +155,7 @@
       "default": "gradient",
       "choices": [
         {
-          "label": "Green → yellow → red",
+          "label": "Green \u2192 yellow \u2192 red",
           "value": "gradient"
         },
         {

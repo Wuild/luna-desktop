@@ -12,7 +12,7 @@ const prefs = new Preferences(metadata);
 const window = new Adw.PreferencesWindow();
 await prefs.fillPreferencesWindow(window);
 const navigation = window._settingsNavigation;
-if (navigation.pages.length !== 4) throw new Error('Expected icons, layout, appearance and widgets categories');
+if (navigation.pages.length !== 6) throw new Error('Expected icons, layout, appearance, tiling, app switcher and widgets categories');
 navigation.filter('snap');
 if (!navigation.resultRows.length) throw new Error('Settings search missing snapping');
 window.present();

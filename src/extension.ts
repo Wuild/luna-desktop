@@ -1,6 +1,7 @@
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import {DesktopSettings} from './settings/settings.js';
 import {DesktopController} from './shell/desktopController.js';
+import {WindowSnapping} from './shell/windowSnapping.js';
 import {AppGridMenu} from './shell/appGridMenu.js';
 
 export default class LunaDesktop extends Extension {
@@ -8,6 +9,8 @@ export default class LunaDesktop extends Extension {
     private menu: AppGridMenu | null = null;
     private settings: DesktopSettings | null = null;
     private menuSignal = 0;
+    private snapSignal = 0;
+    private snapping: WindowSnapping | null = null;
     override enable(): void {
         if (this.settings) return;
         const settings = new DesktopSettings(this.getSettings());
@@ -20,11 +23,20 @@ export default class LunaDesktop extends Extension {
             };
             this.menuSignal = settings.connect('changed::desktop-app-menu-enabled', syncMenu);
             syncMenu();
+            const syncSnapping = (): void => {
+                this.snapping?.destroy(); this.snapping = null;
+                if (settings.get_boolean('desktop-snap-enabled')) this.snapping = new WindowSnapping(settings);
+            };
+            this.snapSignal = settings.connect('changed::desktop-snap-enabled', syncSnapping);
+            syncSnapping();
         } catch (error) { this.disable(); throw error; }
     }
     override disable(): void {
         if (this.menuSignal) this.settings?.disconnect(this.menuSignal);
         this.menuSignal = 0;
+        if (this.snapSignal) this.settings?.disconnect(this.snapSignal);
+        this.snapSignal = 0;
+        this.snapping?.destroy(); this.snapping = null;
         this.menu?.destroy(); this.menu = null;
         this.controller?.destroy(); this.controller = null;
         this.settings = null;

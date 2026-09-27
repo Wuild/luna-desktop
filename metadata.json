@@ -1,11 +1,10 @@
 {
   "uuid": "luna-desktop@wuild",
   "name": "Luna - Desktop",
-  "description": "Desktop icons and customizable widgets for GNOME.",
+  "description": "Desktop icons, customizable widgets, window tiling and a window switcher for GNOME. Accesses the clipboard for user-initiated file copy, cut and paste, and text editing in widgets.",
   "shell-version": [
     "50"
   ],
-  "version": 1,
   "settings-schema": "org.gnome.shell.extensions.luna-desktop",
   "url": "https://github.com/Wuild/luna-desktop"
 }

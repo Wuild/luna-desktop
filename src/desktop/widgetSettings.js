@@ -84,6 +84,7 @@ export function customizeWidget(parent, settings, definition) {
         show('artSize', values.showArtwork);
         show('controlsOnHover', values.showControls);
         for (const field of fields) if (field.key.startsWith('visualizer')) show(field.key, values.showVisualizer);
+        show('visualizerHeight', values.showVisualizer && values.visualizerPlacement !== 'background');
         show('visualizerColor', values.showVisualizer && values.visualizerColorMode !== 'artwork');
     };
     for (const field of fields) {

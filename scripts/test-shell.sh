@@ -9,7 +9,7 @@ mkdir -p "$test_dir"/{config,cache,data/gnome-shell/extensions,runtime}
 mkdir -p "$test_dir/Desktop"
 printf 'XDG_DESKTOP_DIR="%s/Desktop"\n' "$test_dir" > "$test_dir/config/user-dirs.dirs"
 chmod 700 "$test_dir/runtime"
-ln -s "$project_dir/dist" "$test_dir/data/gnome-shell/extensions/luna-desktop@wuild"
+cp -a "${LUNA_TEST_EXTENSION_DIR:-$project_dir/dist}" "$test_dir/data/gnome-shell/extensions/luna-desktop@wuild"
 export XDG_CONFIG_HOME="$test_dir/config" XDG_CACHE_HOME="$test_dir/cache"
 export XDG_DATA_HOME="$test_dir/data" XDG_RUNTIME_DIR="$test_dir/runtime"
 export GSETTINGS_BACKEND=keyfile GIO_USE_VFS=local GTK_A11Y=none
@@ -19,6 +19,8 @@ dbus-run-session -- bash -c '
     gsettings set org.gnome.shell enabled-extensions "['"'"'luna-desktop@wuild'"'"']"
     gsettings set org.gnome.shell disable-user-extensions false
     gsettings set org.gnome.shell welcome-dialog-last-shown-version "50.4"
-    timeout 75s gnome-shell --headless --wayland --no-x11 --virtual-monitor 1280x800 \
+    monitors=(--virtual-monitor 1280x800)
+    if [[ ${LUNA_TEST_SECONDARY_MONITOR:-0} == 1 ]]; then monitors+=(--virtual-monitor 1024x768); fi
+    timeout 75s gnome-shell --headless --wayland --no-x11 "${monitors[@]}" \
         --automation-script "$LUNA_SHELL_SCRIPT"
 '

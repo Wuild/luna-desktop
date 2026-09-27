@@ -4,6 +4,7 @@ import Adw from 'gi://Adw?version=1';
 import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import GLibUnix from 'gi://GLibUnix';
 import Pango from 'gi://Pango';
 import {desktopLauncher} from './launchers.js';
 import {gridMetrics, arrangeIcons, groupDrop, intersects, cellPosition} from './layout.js';
@@ -593,7 +594,14 @@ app.connect('activate', () => {
         if (key.startsWith('desktop-') || key === 'desktop-accent-color') { style(); refresh(); }
     });
 });
+let terminateSource = GLibUnix.signal_add(GLib.PRIORITY_DEFAULT, 15, () => {
+    terminateSource = 0;
+    app.quit();
+    return GLib.SOURCE_REMOVE;
+});
 app.connect('shutdown', () => {
+    if (terminateSource) GLib.Source.remove(terminateSource);
+    terminateSource = 0;
     generation++;
     widgetHost.clear();
     for (const id of volumeSignals) volumes.disconnect(id);

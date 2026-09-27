@@ -10,3 +10,8 @@ __pycache__/
 .idea/
 .agents/
 .codex/
+
+native/build/
+
+# GObject Introspection scanner scratch files
+g-ir-cpp-*.c

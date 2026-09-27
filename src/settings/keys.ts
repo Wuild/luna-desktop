@@ -33,6 +33,26 @@ export interface SettingsValues {
     "desktop-widget-options": string;
     "desktop-accent-color": string;
     "desktop-app-menu-enabled": boolean;
+    "desktop-switcher-opacity": number;
+    "desktop-switcher-blur-radius": number;
+    "desktop-switcher-corner-radius": number;
+    "desktop-switcher-padding": number;
+    "desktop-switcher-card-spacing": number;
+    "desktop-switcher-transparency": boolean;
+    "desktop-switcher-color-override": boolean;
+    "desktop-switcher-color": string;
+    "desktop-switcher-width-percent": number;
+    "desktop-snap-switcher-enabled": boolean;
+    "desktop-snap-enabled": boolean;
+    "desktop-snap-bar-enabled": boolean;
+    "desktop-snap-assist-enabled": boolean;
+    "desktop-snap-layout-shortcut": string[];
+    "desktop-snap-left": string[];
+    "desktop-snap-right": string[];
+    "desktop-snap-up": string[];
+    "desktop-snap-down": string[];
+    "desktop-snap-gap": number;
+    "desktop-snap-square-corners": boolean;
 }
 
 export const settingDefinitions = {
@@ -181,6 +201,94 @@ export const settingDefinitions = {
         "type": "s"
     },
     "desktop-app-menu-enabled": {
+        "type": "b"
+    },
+    "desktop-switcher-opacity": {
+        "type": "i",
+        "range": [
+            0,
+            100
+        ]
+    },
+    "desktop-switcher-blur-radius": {
+        "type": "i",
+        "range": [
+            0,
+            100
+        ]
+    },
+    "desktop-switcher-corner-radius": {
+        "type": "i",
+        "range": [
+            0,
+            32
+        ]
+    },
+    "desktop-switcher-padding": {
+        "type": "i",
+        "range": [
+            0,
+            24
+        ]
+    },
+    "desktop-switcher-card-spacing": {
+        "type": "i",
+        "range": [
+            0,
+            24
+        ]
+    },
+    "desktop-switcher-transparency": {
+        "type": "b"
+    },
+    "desktop-switcher-color-override": {
+        "type": "b"
+    },
+    "desktop-switcher-color": {
+        "type": "s"
+    },
+    "desktop-switcher-width-percent": {
+        "type": "i",
+        "range": [
+            40,
+            95
+        ]
+    },
+    "desktop-snap-switcher-enabled": {
+        "type": "b"
+    },
+    "desktop-snap-enabled": {
+        "type": "b"
+    },
+    "desktop-snap-bar-enabled": {
+        "type": "b"
+    },
+    "desktop-snap-assist-enabled": {
+        "type": "b"
+    },
+    "desktop-snap-layout-shortcut": {
+        "type": "as"
+    },
+    "desktop-snap-left": {
+        "type": "as"
+    },
+    "desktop-snap-right": {
+        "type": "as"
+    },
+    "desktop-snap-up": {
+        "type": "as"
+    },
+    "desktop-snap-down": {
+        "type": "as"
+    },
+    "desktop-snap-gap": {
+        "type": "i",
+        "range": [
+            0,
+            48
+        ]
+    },
+    "desktop-snap-square-corners": {
         "type": "b"
     }
 } as const;

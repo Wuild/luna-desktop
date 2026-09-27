@@ -29,5 +29,5 @@ test('All relative module dependencies and widget assets are packaged', () => {
         assert.equal(manifest.id, id);
         assert(existsSync(new URL(`desktop/widgets/${id}/widget.js`, root)));
     }
-    assert(existsSync(new URL('desktop/widgets/now-playing/spectrum.py', root)));
+    assert(existsSync(new URL('desktop/widgets/now-playing/audioCapture.js', root)));
 });

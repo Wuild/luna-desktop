@@ -154,5 +154,25 @@
       <default>true</default>
       <summary>Add desktop shortcut actions to application menus</summary>
     </key>
+    <key name="desktop-switcher-opacity" type="i"><default>56</default><range min="0" max="100"/><summary>App switcher opacity</summary></key>
+    <key name="desktop-switcher-blur-radius" type="i"><default>12</default><range min="0" max="100"/><summary>App switcher blur-radius</summary></key>
+    <key name="desktop-switcher-corner-radius" type="i"><default>12</default><range min="0" max="32"/><summary>App switcher corner-radius</summary></key>
+    <key name="desktop-switcher-padding" type="i"><default>6</default><range min="0" max="24"/><summary>App switcher padding</summary></key>
+    <key name="desktop-switcher-card-spacing" type="i"><default>6</default><range min="0" max="24"/><summary>App switcher card-spacing</summary></key>
+    <key name="desktop-switcher-transparency" type="b"><default>true</default><summary>App switcher transparency and blur</summary></key>
+    <key name="desktop-switcher-color-override" type="b"><default>false</default><summary>Override app switcher background color</summary></key>
+    <key name="desktop-switcher-color" type="s"><default>'#26201e'</default><summary>App switcher background color</summary></key>
+    <key name="desktop-switcher-width-percent" type="i"><default>80</default><range min="40" max="95"/><summary>Maximum app switcher width as a percentage of the monitor</summary></key>
+    <key name="desktop-snap-switcher-enabled" type="b"><default>true</default><summary>Use the Luna window and snap group switcher</summary></key>
+    <key name="desktop-snap-enabled" type="b"><default>true</default><summary>Enable window tiling</summary></key>
+    <key name="desktop-snap-bar-enabled" type="b"><default>true</default><summary>Show layouts at the top while dragging</summary></key>
+    <key name="desktop-snap-assist-enabled" type="b"><default>true</default><summary>Choose windows for empty tiles</summary></key>
+    <key name="desktop-snap-layout-shortcut" type="as"><default>['&lt;Super&gt;z']</default><summary>Window tiling layout-shortcut</summary></key>
+    <key name="desktop-snap-left" type="as"><default>['&lt;Super&gt;&lt;Control&gt;Left']</default><summary>Window tiling left</summary></key>
+    <key name="desktop-snap-right" type="as"><default>['&lt;Super&gt;&lt;Control&gt;Right']</default><summary>Window tiling right</summary></key>
+    <key name="desktop-snap-up" type="as"><default>['&lt;Super&gt;&lt;Control&gt;Up']</default><summary>Window tiling up</summary></key>
+    <key name="desktop-snap-down" type="as"><default>['&lt;Super&gt;&lt;Control&gt;Down']</default><summary>Window tiling down</summary></key>
+    <key name="desktop-snap-gap" type="i"><range min="0" max="48"/><default>8</default><summary>Space between tiled windows</summary></key>
+    <key name="desktop-snap-square-corners" type="b"><default>false</default><summary>Use maximized styling inside tiles with the native helper</summary></key>
   </schema>
 </schemalist>
