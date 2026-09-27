@@ -1,0 +1,11 @@
+{
+  "uuid": "luna-desktop@wuild",
+  "name": "Luna - Desktop",
+  "description": "Desktop icons and customizable widgets for GNOME.",
+  "shell-version": [
+    "50"
+  ],
+  "version": 1,
+  "settings-schema": "org.gnome.shell.extensions.luna-desktop",
+  "url": "https://github.com/Wuild/luna-desktop"
+}

@@ -1,0 +1,60 @@
+{
+  "apiVersion": 1,
+  "id": "clock",
+  "name": "Clock",
+  "description": "Local time and date",
+  "width": 260,
+  "height": 150,
+  "settings": [
+    {
+      "key": "format",
+      "label": "Time format",
+      "type": "choice",
+      "default": "24h",
+      "choices": [
+        {
+          "label": "24 hour",
+          "value": "24h"
+        },
+        {
+          "label": "12 hour",
+          "value": "12h"
+        }
+      ]
+    },
+    {
+      "key": "showDate",
+      "label": "Show date",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "textSize",
+      "label": "Clock text size",
+      "type": "number",
+      "min": 16,
+      "max": 72,
+      "default": 32
+    },
+    {
+      "key": "shadow",
+      "label": "Text shadow",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "shadowStrength",
+      "label": "Shadow opacity (%)",
+      "type": "number",
+      "min": 10,
+      "max": 100,
+      "default": 80
+    },
+    {
+      "key": "textColor",
+      "label": "Text color",
+      "type": "color",
+      "default": "#ffffff"
+    }
+  ]
+}

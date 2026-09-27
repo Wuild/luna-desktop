@@ -1,0 +1,155 @@
+{
+  "apiVersion": 1,
+  "id": "now-playing",
+  "name": "Now Playing",
+  "description": "Album artwork, track details, and optional playback controls",
+  "width": 320,
+  "height": 180,
+  "interactive": true,
+  "settings": [
+    {
+      "key": "hideWhenIdle",
+      "label": "Hide when nothing is playing",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "player",
+      "label": "Preferred player (blank = automatic)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "key": "excludedApps",
+      "label": "Excluded apps (comma-separated names or IDs)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "key": "showArtwork",
+      "label": "Show album artwork",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "artSize",
+      "label": "Album artwork size",
+      "type": "number",
+      "default": 80,
+      "min": 40,
+      "max": 160
+    },
+    {
+      "key": "showAlbum",
+      "label": "Show album name",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showControls",
+      "label": "Show playback controls",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "controlsOnHover",
+      "label": "Reveal controls on hover",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "textSize",
+      "label": "Track title size",
+      "type": "number",
+      "default": 18,
+      "min": 12,
+      "max": 36
+    },
+    {
+      "key": "textColor",
+      "label": "Text color",
+      "type": "color",
+      "default": "#ffffff"
+    },
+    {
+      "key": "shadow",
+      "label": "Text shadow",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "shadowStrength",
+      "label": "Shadow opacity (%)",
+      "type": "number",
+      "default": 80,
+      "min": 10,
+      "max": 100
+    },
+    {
+      "key": "showVisualizer",
+      "label": "Audio visualizer (selected app)",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "visualizerUpdateRate",
+      "label": "Visualizer updates per second",
+      "type": "number",
+      "default": 60,
+      "min": 10,
+      "max": 60,
+      "step": 5
+    },
+    {
+      "key": "visualizerSensitivity",
+      "label": "Visualizer sensitivity (%)",
+      "type": "number",
+      "default": 100,
+      "min": 25,
+      "max": 300,
+      "step": 5
+    },
+    {
+      "key": "visualizerBars",
+      "label": "Visualizer bars",
+      "type": "number",
+      "min": 8,
+      "max": 48,
+      "default": 24
+    },
+    {
+      "key": "visualizerHeight",
+      "label": "Visualizer height",
+      "type": "number",
+      "min": 20,
+      "max": 120,
+      "default": 40
+    },
+    {
+      "key": "visualizerColorMode",
+      "label": "Visualizer color mode",
+      "type": "choice",
+      "default": "gradient",
+      "choices": [
+        {
+          "label": "Green → yellow → red",
+          "value": "gradient"
+        },
+        {
+          "label": "Solid color",
+          "value": "solid"
+        },
+        {
+          "label": "Album artwork",
+          "value": "artwork"
+        }
+      ]
+    },
+    {
+      "key": "visualizerColor",
+      "label": "Solid / fallback color",
+      "type": "color",
+      "default": "#ffffff"
+    }
+  ]
+}

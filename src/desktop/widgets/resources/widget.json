@@ -1,0 +1,273 @@
+{
+  "apiVersion": 1,
+  "id": "resources",
+  "name": "Resources",
+  "description": "CPU, GPU and memory usage rings",
+  "width": 360,
+  "height": 160,
+  "settings": [
+    {
+      "key": "layout",
+      "label": "Progress rings",
+      "type": "choice",
+      "default": "multiple",
+      "choices": [
+        {
+          "label": "Separate rings",
+          "value": "multiple"
+        },
+        {
+          "label": "Concentric rings",
+          "value": "single"
+        }
+      ]
+    },
+    {
+      "key": "orientation",
+      "label": "Ring arrangement",
+      "type": "choice",
+      "default": "auto",
+      "choices": [
+        {
+          "label": "Automatic wrapping",
+          "value": "auto"
+        },
+        {
+          "label": "Horizontal",
+          "value": "horizontal"
+        },
+        {
+          "label": "Vertical",
+          "value": "vertical"
+        }
+      ]
+    },
+    {
+      "key": "arc",
+      "label": "Ring shape",
+      "type": "choice",
+      "default": "full",
+      "choices": [
+        {
+          "label": "Full circle",
+          "value": "full"
+        },
+        {
+          "label": "Three-quarter circle",
+          "value": "three-quarter"
+        },
+        {
+          "label": "Half circle",
+          "value": "half"
+        },
+        {
+          "label": "Quarter circle",
+          "value": "quarter"
+        },
+        {
+          "label": "Custom arc",
+          "value": "custom"
+        }
+      ]
+    },
+    {
+      "key": "arcDegrees",
+      "label": "Custom arc (degrees)",
+      "type": "number",
+      "min": 30,
+      "max": 360,
+      "step": 15,
+      "default": 270
+    },
+    {
+      "key": "rotation",
+      "label": "Rotation (degrees)",
+      "type": "number",
+      "min": -360,
+      "max": 360,
+      "step": 15,
+      "default": 0
+    },
+    {
+      "key": "showCpu",
+      "label": "Show cpu ring",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showGpu",
+      "label": "Show gpu ring",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showMemory",
+      "label": "Show memory ring",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showSwap",
+      "label": "Show swap ring",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "showDisk",
+      "label": "Show disk usage ring",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "showDownload",
+      "label": "Show download speed ring",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "showUpload",
+      "label": "Show upload speed ring",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "showBattery",
+      "label": "Show battery ring",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "ringSize",
+      "label": "Ring diameter",
+      "type": "number",
+      "min": 48,
+      "max": 180,
+      "default": 88
+    },
+    {
+      "key": "thickness",
+      "label": "Ring thickness",
+      "type": "number",
+      "min": 2,
+      "max": 18,
+      "default": 6
+    },
+    {
+      "key": "ringGap",
+      "label": "Concentric ring spacing",
+      "type": "number",
+      "min": 0,
+      "max": 12,
+      "default": 3
+    },
+    {
+      "key": "showLabels",
+      "label": "Show metric names",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showValues",
+      "label": "Show value text",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "cpuColor",
+      "label": "CPU color",
+      "type": "color",
+      "default": "#80bfff"
+    },
+    {
+      "key": "gpuColor",
+      "label": "GPU color",
+      "type": "color",
+      "default": "#a6e3a1"
+    },
+    {
+      "key": "memoryColor",
+      "label": "Memory color",
+      "type": "color",
+      "default": "#cba6f7"
+    },
+    {
+      "key": "textColor",
+      "label": "Text color",
+      "type": "color",
+      "default": "#ffffff"
+    },
+    {
+      "key": "shadow",
+      "label": "Shadows",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "shadowStrength",
+      "label": "Shadow opacity (%)",
+      "type": "number",
+      "min": 10,
+      "max": 100,
+      "default": 80
+    },
+    {
+      "key": "interval",
+      "label": "Update interval (ms)",
+      "type": "number",
+      "min": 500,
+      "max": 5000,
+      "step": 100,
+      "default": 1000
+    },
+    {
+      "key": "swapColor",
+      "label": "Swap color",
+      "type": "color",
+      "default": "#f5c2e7"
+    },
+    {
+      "key": "diskColor",
+      "label": "Disk usage color",
+      "type": "color",
+      "default": "#f9e2af"
+    },
+    {
+      "key": "downloadColor",
+      "label": "Download speed color",
+      "type": "color",
+      "default": "#89dceb"
+    },
+    {
+      "key": "uploadColor",
+      "label": "Upload speed color",
+      "type": "color",
+      "default": "#fab387"
+    },
+    {
+      "key": "batteryColor",
+      "label": "Battery color",
+      "type": "color",
+      "default": "#94e2d5"
+    },
+    {
+      "key": "diskPath",
+      "label": "Disk path (blank uses Home)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "key": "networkInterface",
+      "label": "Network interface (auto or name)",
+      "type": "string",
+      "default": "auto"
+    },
+    {
+      "key": "networkScale",
+      "label": "Full network ring speed (Mbps)",
+      "type": "number",
+      "min": 1,
+      "max": 10000,
+      "default": 100
+    }
+  ]
+}

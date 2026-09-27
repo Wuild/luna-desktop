@@ -1,0 +1,22 @@
+{
+  "name": "luna-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Luna - Desktop: GNOME desktop icons and widgets",
+  "scripts": {
+    "generate": "python3 scripts/generate-settings.py",
+    "typecheck": "pnpm generate && tsc --noEmit && tsc -p tsconfig.tests.json",
+    "build": "node scripts/build.mjs --clean && pnpm generate && tsc && node scripts/build.mjs",
+    "test": "pnpm build && tsc -p tsconfig.tests.json && node scripts/test.mjs",
+    "pack": "bash scripts/package.sh",
+    "test:shell": "pnpm build && bash scripts/test-shell.sh"
+  },
+  "devDependencies": {
+    "@girs/adw-1": "^4.9.0",
+    "@girs/gjs": "^4.9.0",
+    "@girs/gnome-shell": "^50.0.4",
+    "@girs/gtk-4.0": "^4.9.0",
+    "typescript": "^5.9.3"
+  }
+}

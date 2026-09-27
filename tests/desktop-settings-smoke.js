@@ -1,0 +1,22 @@
+import Gio from 'gi://Gio';
+import {DesktopSettings} from '../dist/settings/settings.js';
+import {discoverWidgets, widgetInstances} from '../dist/widgets/catalog.js';
+const root = Gio.File.new_for_uri(import.meta.url).get_parent().get_parent().get_child('dist').get_path();
+const source = Gio.SettingsSchemaSource.new_from_directory(`${root}/schemas`, Gio.SettingsSchemaSource.get_default(), false);
+const raw = new Gio.Settings({settings_schema: source.lookup('org.gnome.shell.extensions.luna-desktop', false)});
+const settings = new DesktopSettings(raw);
+function assert(value, message) { if (!value) throw new Error(message); }
+settings.set_int('desktop-icon-size', 64);
+settings.set_boolean('desktop-icons-enabled', false);
+settings.resetAll();
+assert(settings.get_boolean('desktop-icons-enabled'), 'Desktop default restored');
+assert(settings.get_strv('desktop-enabled-widgets').length === 0, 'New desktops have no preselected widgets');
+settings.set_strv('desktop-enabled-widgets', [...settings.get_strv('desktop-enabled-widgets'), 'now-playing']);
+settings.set_boolean('desktop-widgets-enabled', true);
+assert(JSON.stringify(settings.get_strv('desktop-enabled-widgets')) === '["now-playing"]', 'First widget does not enable Clock');
+settings.resetAll();
+assert(raw.get_user_value('desktop-icon-size') === null, 'Reset clears customization');
+const definitions = discoverWidgets(root);
+assert(definitions.length >= 5, 'Built-in widget discovery');
+assert(widgetInstances(definitions, ['clock', 'sticky-note:test', '../bad']).length === 2, 'Valid instances only');
+print('LUNA_DESKTOP_SETTINGS_PASS');

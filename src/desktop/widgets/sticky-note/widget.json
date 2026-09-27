@@ -1,0 +1,78 @@
+{
+  "apiVersion": 1,
+  "id": "sticky-note",
+  "name": "Sticky Note",
+  "description": "Click to write; add multiple independent notes in Edit Desktop",
+  "width": 280,
+  "height": 200,
+  "interactive": true,
+  "settings": [
+    {
+      "key": "title",
+      "label": "Title",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "key": "showTitle",
+      "label": "Show title",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "textSize",
+      "label": "Text size",
+      "type": "number",
+      "default": 16,
+      "min": 10,
+      "max": 48
+    },
+    {
+      "key": "alignment",
+      "label": "Text alignment",
+      "type": "choice",
+      "default": "left",
+      "choices": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "key": "textColor",
+      "label": "Text color",
+      "type": "color",
+      "default": "#3d3421"
+    },
+    {
+      "key": "shadow",
+      "label": "Text shadow",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "shadowStrength",
+      "label": "Shadow opacity (%)",
+      "type": "number",
+      "default": 80,
+      "min": 10,
+      "max": 100
+    }
+  ],
+  "multiple": true,
+  "defaults": {
+    "background": true,
+    "backgroundColor": "#f7df8b",
+    "backgroundOpacity": 100,
+    "cornerRadius": 4
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "apiVersion": 1,
+  "id": "storage",
+  "name": "Storage",
+  "description": "Drive capacity, free space, and folder shortcuts",
+  "width": 320,
+  "height": 260,
+  "interactive": true,
+  "defaults": {
+    "background": true
+  },
+  "settings": [
+    {
+      "key": "showHome",
+      "label": "Show Home storage",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showSystem",
+      "label": "Show system drive",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "showMounted",
+      "label": "Show mounted drives",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}

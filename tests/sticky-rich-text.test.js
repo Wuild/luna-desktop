@@ -1,0 +1,13 @@
+import Gtk from 'gi://Gtk?version=4.0';
+import {richText} from '../dist/desktop/widgets/sticky-note/richText.js';
+const buffer=new Gtk.TextBuffer();buffer.text='Hello 🌙 https://example.com.';
+const rich=richText(buffer);
+buffer.select_range(buffer.get_iter_at_offset(0),buffer.get_iter_at_offset(5));
+if(!rich.toggle('bold'))throw Error('Bold failed');
+let saved=rich.serialize();
+if(saved.spans[0]?.style!=='bold'||saved.spans[0]?.end!==5)throw Error('Formatting range lost');
+if(rich.linkAt(9)!=='https://example.com')throw Error('Unicode URL offset or punctuation detection failed');
+const restored=new Gtk.TextBuffer();restored.text=saved.text;
+if(JSON.stringify(richText(restored,saved).serialize())!==JSON.stringify(saved))throw Error('Rich text roundtrip failed');
+rich.toggle('bold');if(rich.serialize().spans.length)throw Error('Formatting toggle failed');
+print('LUNA_DESKTOP_RICH_TEXT_PASS');

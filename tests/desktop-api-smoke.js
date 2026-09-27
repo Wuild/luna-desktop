@@ -1,0 +1,195 @@
+import Gtk from 'gi://Gtk?version=4.0';
+import Adw from 'gi://Adw?version=1';
+import {followAppearance} from '../dist/desktop/appearance.js';
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import {WidgetHost, discoverWidgets} from '../dist/desktop/widgetHost.js';
+import {widgetOptions, customizeWidget} from '../dist/desktop/widgetSettings.js';
+import {menu, copyItems, canPaste, pasteInto} from '../dist/desktop/fileActions.js';
+GLib.set_prgname('luna-desktop-desktop-api-test');
+Adw.init();
+const loop = new GLib.MainLoop(null, false);
+const root = Gio.File.new_for_uri(import.meta.url).get_parent().get_parent().get_child('dist').get_path();
+const schema = Gio.SettingsSchemaSource.new_from_directory(`${root}/schemas`, Gio.SettingsSchemaSource.get_default(), false).lookup('org.gnome.shell.extensions.luna-desktop', true);
+const settings = new Gio.Settings({settings_schema: schema});
+const window = new Gtk.Window({default_width: 800, default_height: 600});
+const fixed = new Gtk.Fixed(); window.set_child(fixed); window.present();
+const wait = ms => new Promise(resolve => GLib.timeout_add(GLib.PRIORITY_DEFAULT, ms, () => { resolve(); return GLib.SOURCE_REMOVE; }));
+function assert(value, message) { if (!value) throw new Error(message); }
+let failure;
+(async () => {
+    await wait(250);
+    const appearance = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
+    const stopAppearance = followAppearance();
+    appearance.set_string('color-scheme', 'prefer-dark');
+    await wait(100);
+    assert(Adw.StyleManager.get_default().dark, 'Desktop menus follow Dark Style');
+    appearance.set_string('color-scheme', 'prefer-light');
+    await wait(100);
+    assert(!Adw.StyleManager.get_default().dark, 'Live switch to light appearance works');
+    stopAppearance();
+    assert(discoverWidgets(root).some(widget => widget.id === 'clock'), 'Bundled clock discovered');
+    settings.set_boolean('desktop-widgets-enabled', true);
+    settings.set_strv('desktop-enabled-widgets', ['clock']);
+    const host = new WidgetHost(root, settings);
+    await host.mount([{fixed, monitor: {id: 'test', primary: true, width: 800, height: 600}}]);
+    await wait(100);
+    assert(host.instances.length === 1 && host.instances[0].card.get_parent() === fixed, 'Clock widget mounts');
+    assert(!host.instances[0].card.can_target, 'HUD widget is not interactive by default');
+    assert(!host.instances[0].header.visible, 'HUD widget has no header or remove button');
+    assert(host.instances[0].cleanups.length === 4, 'HUD keeps its timer and reusable drag controller');
+    const originalCard = host.instances[0].card;
+    const originalContent = host.instances[0].content;
+    const hudSize = [host.instances[0].card.get_width(), host.instances[0].card.get_height()];
+    const hudRect = {...host.instances[0].rect};
+    await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}], true);
+    await wait(150);
+    assert(host.instances[0].card === originalCard && host.instances[0].content === originalContent, 'Edit mode reuses the live widget');
+    assert(JSON.stringify(hudSize) === JSON.stringify([host.instances[0].card.get_width(), host.instances[0].card.get_height()]), 'Edit overlay does not resize widget');
+    assert(JSON.stringify(hudRect) === JSON.stringify(host.instances[0].rect), 'Edit mode does not shift widget position');
+    assert(host.instances[0].card.can_target && !host.instances[0].header.visible, 'Edit controls stay hidden until hover');
+    assert(host.instances[0].cleanups.length === 4, 'Edit mode drag controller is disposed with widget');
+    const instance = host.instances[0];
+    const motion = instance.card.observe_controllers();
+    for (let i = 0; i < motion.get_n_items(); i++) {
+        const controller = motion.get_item(i);
+        if (controller instanceof Gtk.EventControllerMotion) controller.emit('enter', 20, 20);
+    }
+    await wait(80);
+    assert(instance.header.visible && instance.header.get_parent() === fixed, 'Hover toolbar floats outside widget content');
+    const assertToolbarAnchor = () => {
+        const [hx, hy] = fixed.get_child_position(instance.header);
+        assert(hx > instance.rect.x - 100 && Math.abs(hy - instance.rect.y) < instance.rect.height + 100,
+            'Hover toolbar stays anchored after changing sibling order');
+    };
+    assertToolbarAnchor();
+    const topSibling = new Gtk.Label({label: 'New top sibling'});
+    fixed.put(topSibling, 5, 5);
+    for (let i = 0; i < motion.get_n_items(); i++) {
+        const controller = motion.get_item(i);
+        if (controller instanceof Gtk.EventControllerMotion) controller.emit('enter', 20, 20);
+    }
+    await wait(80);
+    assertToolbarAnchor();
+    fixed.remove(topSibling);
+    await wait(100);
+    const toolbarSnapshot = new Gtk.Snapshot();
+    new Gtk.WidgetPaintable({widget: window}).snapshot(toolbarSnapshot, window.get_width(), window.get_height());
+    window.get_renderer().render_texture(toolbarSnapshot.to_node(), null).save_to_png('/tmp/luna-floating-widget-toolbar.png');
+    instance.toolbar.setEditing(false);
+    assert(!instance.header.visible, 'Toolbar hides outside editing');
+    instance.toolbar.setEditing(true);
+    const clock = discoverWidgets(root).find(widget => widget.id === 'clock');
+    customizeWidget(window, settings, clock);
+    const dialogs = Gtk.Window.get_toplevels();
+    const dialog = Array.from({length: dialogs.get_n_items()}, (_, i) => dialogs.get_item(i)).find(w => w.title === 'Customize Clock');
+    assert(dialog, 'Widget customization dialog opens');
+    await wait(200);
+    const findSpin = widget => {
+        if (widget instanceof Gtk.SpinButton) return widget;
+        for (let child = widget.get_first_child(); child; child = child.get_next_sibling()) {
+            const found = findSpin(child); if (found) return found;
+        }
+        return null;
+    };
+    const findWidth = widget => {
+        if (widget instanceof Adw.ActionRow && widget.title === 'Width') return findSpin(widget);
+        for (let child = widget.get_first_child(); child; child = child.get_next_sibling()) {
+            const found = findWidth(child); if (found) return found;
+        }
+        return null;
+    };
+    const widthControl = findWidth(dialog);
+    widthControl.value = 320;
+    assert(widgetOptions(settings, clock).width === 320, 'Customization is saved immediately before Done');
+    dialog.response(Gtk.ResponseType.OK);
+    await wait(200);
+    assert(widgetOptions(settings, clock).showDate === true, 'Widget-specific options persist');
+    const cancelDialog = customizeWidget(window, settings, clock);
+    await wait(200);
+    findWidth(cancelDialog).value = 400;
+    assert(widgetOptions(settings, clock).width === 400, 'Second preview updates immediately');
+    cancelDialog.response(Gtk.ResponseType.CLOSE);
+    await wait(200);
+    assert(widgetOptions(settings, clock).width === 400, 'Closing keeps immediately saved customization');
+    const card = host.instances[0].card;
+    host.clear(); assert(!card.get_parent() && !host.instances.length, 'Widget unmounted and cleaned up');
+    let activated = false;
+    const popup = menu(fixed, 300, 100, [['Enabled', () => { activated = true; }], null, ['More', [['Disabled', () => {}, false]]]]);
+    assert(popup instanceof Gtk.PopoverMenu, 'Context menu uses native menu model');
+    await wait(200);
+    popup.activate_action('desktop.item0', null);
+    assert(activated, 'Context menu action invokes its handler');
+    await wait(200);
+    const folder = Gio.File.new_for_path(GLib.dir_make_tmp('luna-desktop-file-actions-XXXXXX'));
+    const source = folder.get_child('original'); source.make_directory(null);
+    const tree = source.get_child('folder'); tree.make_directory(null);
+    tree.get_child('nested.txt').replace_contents('fixture', null, false, Gio.FileCreateFlags.NONE, null);
+    const target = folder.get_child('target'); target.make_directory(null);
+    copyItems([{file: tree}]); assert(canPaste(), 'URI clipboard advertised');
+    await pasteInto(target);
+    assert(target.get_child('folder/nested.txt').query_exists(null), 'Recursive copy works');
+    let conflict = false;
+    try { await pasteInto(target); } catch { conflict = true; }
+    assert(conflict, 'Existing folder is not overwritten');
+    const moveTarget = folder.get_child('move'); moveTarget.make_directory(null);
+    copyItems([{file: tree}], true); await pasteInto(moveTarget);
+    assert(!tree.query_exists(null) && moveTarget.get_child('folder/nested.txt').query_exists(null), 'Cut moves folder');
+    assert(!canPaste(), 'Successful cut clears clipboard');
+    settings.set_strv('desktop-enabled-widgets', ['resources']);
+    await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}]);
+    await wait(1300);
+    assert(host.instances.length === 1 && !host.instances[0].card.can_target, 'Resources widget runs as passive HUD');
+    const paintable = new Gtk.WidgetPaintable({widget: window});
+    const snapshot = new Gtk.Snapshot();
+    paintable.snapshot(snapshot, window.get_width(), window.get_height());
+    const node = snapshot.to_node();
+    if (node) window.get_renderer().render_texture(node, null).save_to_png('/tmp/luna-desktop-resources-widget.png');
+    settings.set_string('desktop-widget-options', JSON.stringify({resources: {layout: 'single', metric: 'memory', background: true, backgroundColor: '#26364a', backgroundOpacity: 40}}));
+    await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}]);
+    await wait(150);
+    assert(host.instances[0].content.get_first_child() instanceof Gtk.DrawingArea, 'Concentric layout has one shared drawing area');
+    let legendCount = 0; for (let item = host.instances[0].content.get_last_child().get_first_child(); item; item = item.get_next_sibling()) legendCount++;
+    assert(legendCount === 3, 'Concentric mode retains every enabled metric');
+    settings.set_string('desktop-widget-options', JSON.stringify({resources: {showCpu: false, showGpu: false, showMemory: false, showDisk: true, showDownload: true}}));
+    await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}]);
+    const rings = host.instances[0].content;
+    let ringCount = 0; for (let ring = rings.get_first_child(); ring; ring = ring.get_next_sibling()) ringCount++;
+    assert(ringCount === 2, 'Each resource ring can be enabled independently');
+    settings.set_string('desktop-widget-options', JSON.stringify({resources: {orientation: 'vertical', arc: 'half', rotation: 90, showLabels: false, showValues: false}}));
+    await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}]);
+    await wait(100);
+    const vertical = host.instances[0].content;
+    assert(vertical.max_children_per_line === 1, 'Vertical ring layout');
+    const metricColumn = vertical.get_first_child().get_child();
+    assert(metricColumn.get_first_child() === metricColumn.get_last_child(), 'Metric label can be hidden');
+    assert(!metricColumn.get_first_child().get_last_child().visible, 'Value text can be hidden independently');
+    const icon = new Gtk.Button({label: 'Icon', width_request: 60, height_request: 60});
+    fixed.put(icon, 16, 16);
+    settings.set_string('desktop-widget-positions', '{}');
+    settings.set_strv('desktop-enabled-widgets', ['clock', 'resources']);
+    await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}]);
+    assert(fixed.get_last_child() === icon, 'Icons stay above asynchronously mounted widgets');
+    const cardsBeforeEdit = host.instances.map(item => item.card);
+    const rectsBeforeEdit = host.instances.map(item => JSON.stringify(item.rect));
+    for (const mode of [true, false, true, false]) {
+        await host.mount([{fixed, window, monitor: {id: 'test', primary: true, width: 800, height: 600}}], mode);
+        assert(host.instances.every((item, i) => item.card === cardsBeforeEdit[i] && JSON.stringify(item.rect) === rectsBeforeEdit[i]), 'Repeated edit transitions preserve all widget cards and positions');
+    }
+    host.raise(host.instances[1]);
+    const stacking = [];
+    for (let child = fixed.get_first_child(); child; child = child.get_next_sibling()) stacking.push(child);
+    assert(stacking.indexOf(host.instances[1].card) > stacking.indexOf(host.instances[0].card) &&
+        stacking.indexOf(host.instances[1].card) < stacking.indexOf(icon), 'Selected widget rises above other widgets but remains below icons');
+    const [first, second] = host.instances.map(instance => instance.rect);
+    assert(first && second && !(first.x < second.x + second.width && first.x + first.width > second.x && first.y < second.y + second.height && first.y + first.height > second.y), 'New widgets do not overlap');
+    assert(Object.keys(JSON.parse(settings.get_string('desktop-widget-positions'))).length === 2, 'Automatic widget placement is remembered');
+    await wait(200);
+    const combined = new Gtk.Snapshot();
+    new Gtk.WidgetPaintable({widget: window}).snapshot(combined, window.get_width(), window.get_height());
+    window.get_renderer().render_texture(combined.to_node(), null).save_to_png('/tmp/luna-desktop-widgets-shadow.png');
+    host.clear();
+    print('LUNA_DESKTOP_DESKTOP_API_PASS');
+})().catch(e => { failure = e; console.error(e); }).finally(() => { window.destroy(); loop.quit(); });
+loop.run();
+if (failure) throw failure;

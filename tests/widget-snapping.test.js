@@ -1,0 +1,21 @@
+import {snapWidget} from '../dist/desktop/widgetSnapping.js';
+function assert(ok,message){if(!ok)throw Error(message);}
+const area={width:1000,height:800},peer={x:300,y:250,width:200,height:150};
+let r=snapWidget({x:306,y:257,width:150,height:100},[peer],area);
+assert(r.x===300&&r.y===250,'Align neighboring left/top edges');
+r=snapWidget({x:348,y:298,width:150,height:100},[peer],area);
+assert(r.x===350&&r.y===300,'Align neighboring right/bottom edges');
+r=snapWidget({x:319,y:274,width:150,height:100},[peer],area);
+assert(r.x===325&&r.y===275,'Align centers');
+r=snapWidget({x:19,y:80,width:150,height:100},[],area);
+assert(r.x===16&&r.y===80,'Snap to screen margin only within threshold');
+r=snapWidget({x:517,y:83,width:150,height:100},[peer],area);
+assert(r.x===512,'Snap to 12px gutter');
+assert(Object.keys(snapWidget({x:80,y:80,width:150,height:100},[],area).guides).length===0,'No guide when far from targets');
+r=snapWidget({x:35,y:80,width:150,height:100},[],area,10,32);
+assert(r.x===32,'Custom screen margin');
+r=snapWidget({x:4,y:80,width:150,height:100},[],area,10,0);
+assert(r.x===0,'Zero margin reaches screen edge');
+r=snapWidget({x:820,y:670,width:150,height:100},[],area,10,32);
+assert(r.x===818&&r.y===668,'Custom right and bottom margins');
+print('LUNA_DESKTOP_WIDGET_SNAPPING_PASS');

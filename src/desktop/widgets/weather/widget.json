@@ -1,0 +1,143 @@
+{
+  "apiVersion": 1,
+  "id": "weather",
+  "name": "Weather",
+  "description": "Current conditions and a three-day forecast from Open-Meteo",
+  "width": 300,
+  "height": 220,
+  "interactive": false,
+  "settings": [
+    {
+      "key": "autoHeight",
+      "label": "Fit height to visible content",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "city",
+      "label": "City",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "key": "countryCode",
+      "label": "Country code (optional, e.g. SE)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "key": "units",
+      "label": "Temperature units",
+      "type": "choice",
+      "default": "celsius",
+      "choices": [
+        {
+          "value": "celsius",
+          "label": "Celsius"
+        },
+        {
+          "value": "fahrenheit",
+          "label": "Fahrenheit"
+        }
+      ]
+    },
+    {
+      "key": "showForecast",
+      "label": "Show three-day forecast",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showDetails",
+      "label": "Show feels-like temperature and wind",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "textSize",
+      "label": "Temperature size",
+      "type": "number",
+      "default": 36,
+      "min": 20,
+      "max": 64
+    },
+    {
+      "key": "textColor",
+      "label": "Text color",
+      "type": "color",
+      "default": "#ffffff"
+    },
+    {
+      "key": "shadow",
+      "label": "Text shadow",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "shadowStrength",
+      "label": "Shadow opacity (%)",
+      "type": "number",
+      "default": 80,
+      "min": 10,
+      "max": 100
+    },
+    {
+      "key": "showLocation",
+      "label": "Show location",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showConditions",
+      "label": "Show condition text",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showUpdated",
+      "label": "Show update time",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showAttribution",
+      "label": "Show Open-Meteo credit",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "showIcon",
+      "label": "Show weather icons",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "iconSize",
+      "label": "Current weather icon size",
+      "type": "number",
+      "default": 48,
+      "min": 20,
+      "max": 120
+    },
+    {
+      "key": "alignment",
+      "label": "Content alignment",
+      "type": "choice",
+      "default": "center",
+      "choices": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ]
+}

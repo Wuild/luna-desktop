@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='utf-8'?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.luna-desktop" path="/org/gnome/shell/extensions/luna-desktop/">
+    <key name="desktop-icons-enabled" type="b">
+      <default>true</default>
+      <summary>Enable integrated desktop icons</summary>
+    </key>
+    <key name="desktop-show-home" type="b">
+      <default>true</default>
+      <summary>Desktop show-home</summary>
+    </key>
+    <key name="desktop-show-trash" type="b">
+      <default>true</default>
+      <summary>Desktop show-trash</summary>
+    </key>
+    <key name="desktop-show-hidden" type="b">
+      <default>false</default>
+      <summary>Desktop show-hidden</summary>
+    </key>
+    <key name="desktop-single-click" type="b">
+      <default>false</default>
+      <summary>Desktop single-click</summary>
+    </key>
+    <key name="desktop-label-shadow" type="b">
+      <default>true</default>
+      <summary>Desktop label-shadow</summary>
+    </key>
+    <key name="desktop-label-color-override" type="b">
+      <default>false</default>
+      <summary>Desktop label-color-override</summary>
+    </key>
+    <key name="desktop-icon-size" type="i">
+      <range min="24" max="96" />
+      <default>48</default>
+      <summary>Desktop icon-size</summary>
+    </key>
+    <key name="desktop-label-size" type="i">
+      <range min="9" max="24" />
+      <default>12</default>
+      <summary>Desktop label-size</summary>
+    </key>
+    <key name="desktop-corner-radius" type="i">
+      <range min="0" max="24" />
+      <default>6</default>
+      <summary>Desktop corner-radius</summary>
+    </key>
+    <key name="desktop-label-color" type="s">
+      <default>'#ffffff'</default>
+      <summary>Desktop label-color</summary>
+    </key>
+    <key name="desktop-monitor-mode" type="s">
+      <default>'saved'</default>
+      <summary>Desktop monitor-mode</summary>
+    </key>
+    <key name="desktop-icon-positions" type="s">
+      <default>'{}'</default>
+      <summary>Desktop icon-positions</summary>
+    </key>
+    <key name="desktop-label-rows" type="i">
+      <range min="1" max="5" />
+      <default>2</default>
+      <summary>Desktop label-rows</summary>
+    </key>
+    <key name="desktop-grid-spacing" type="i">
+      <range min="0" max="32" />
+      <default>8</default>
+      <summary>Desktop grid-spacing</summary>
+    </key>
+    <key name="desktop-button-width" type="i">
+      <range min="80" max="200" />
+      <default>104</default>
+      <summary>Desktop button-width</summary>
+    </key>
+    <key name="desktop-arrange-corner" type="s">
+      <choices>
+        <choice value="top-left" />
+        <choice value="top-right" />
+        <choice value="bottom-left" />
+        <choice value="bottom-right" />
+      </choices>
+      <default>'top-left'</default>
+      <summary>Desktop arrange corner</summary>
+    </key>
+    <key name="desktop-button-padding" type="i">
+      <range min="0" max="24" />
+      <default>8</default>
+      <summary>Desktop button padding</summary>
+    </key>
+    <key name="desktop-snap-to-grid" type="b">
+      <default>true</default>
+      <summary>Snap desktop icons to grid</summary>
+    </key>
+    <key name="desktop-highlight-grid" type="b">
+      <default>true</default>
+      <summary>Highlight desktop drop targets</summary>
+    </key>
+    <key name="desktop-show-external-drives" type="b">
+      <default>true</default>
+      <summary>Show mounted external drives</summary>
+    </key>
+    <key name="desktop-show-network-drives" type="b">
+      <default>false</default>
+      <summary>Show mounted network drives</summary>
+    </key>
+    <key name="desktop-drives-opposite" type="b">
+      <default>true</default>
+      <summary>Place new drive icons on opposite side</summary>
+    </key>
+    <key name="desktop-widgets-enabled" type="b">
+      <default>false</default>
+      <summary>Show desktop widgets</summary>
+    </key>
+    <key name="desktop-widget-snap-enabled" type="b">
+      <default>true</default>
+      <summary>Snap widgets to each other and screen edges</summary>
+    </key>
+    <key name="desktop-widget-edge-spacing" type="i">
+      <range min="0" max="128" />
+      <default>16</default>
+      <summary>Widget distance from work-area edges</summary>
+    </key>
+    <key name="desktop-widget-snap-distance" type="i">
+      <range min="2" max="32" />
+      <default>10</default>
+      <summary>Widget snapping distance</summary>
+    </key>
+    <key name="desktop-enabled-widgets" type="as">
+      <default>[]</default>
+      <summary>Enabled desktop widget IDs</summary>
+    </key>
+    <key name="desktop-widget-positions" type="s">
+      <default>'{}'</default>
+      <summary>Saved desktop widget positions</summary>
+    </key>
+    <key name="desktop-sort-order" type="s">
+      <choices>
+        <choice value="name" />
+        <choice value="type" />
+        <choice value="modified" />
+        <choice value="size" />
+      </choices>
+      <default>'name'</default>
+      <summary>Desktop icon sorting</summary>
+    </key>
+    <key name="desktop-widget-options" type="s">
+      <default>'{}'</default>
+      <summary>Per-widget appearance and configuration</summary>
+    </key>
+    <key name="desktop-accent-color" type="s">
+      <default>'#3584e4'</default>
+      <summary>Selection and drop-target accent color</summary>
+    </key>
+    <key name="desktop-app-menu-enabled" type="b">
+      <default>true</default>
+      <summary>Add desktop shortcut actions to application menus</summary>
+    </key>
+  </schema>
+</schemalist>
