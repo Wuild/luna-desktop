@@ -1,3 +1,4 @@
+import {_} from '../i18n.js';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 export interface WidgetDefinition {
@@ -11,6 +12,12 @@ function readManifest(file: Gio.File): Partial<WidgetDefinition> | null {
         const value: unknown = JSON.parse(new TextDecoder().decode(file.load_contents(null)[1]));
         return value && typeof value === 'object' && !Array.isArray(value) ? value : null;
     } catch { return null; }
+}
+function translateManifestFields(value: unknown): unknown {
+    if (Array.isArray(value)) return value.map(translateManifestFields);
+    if (!value || typeof value !== 'object') return value;
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key,
+        ['label', 'description'].includes(key) && typeof item === 'string' ? _(item) : translateManifestFields(item)]));
 }
 export function widgetRoots(extensionPath: string): string[] {
     return [`${extensionPath}/desktop/widgets`, `${GLib.get_user_data_dir()}/luna-desktop/widgets`];
@@ -29,7 +36,9 @@ export function discoverWidgets(extensionPath: string): WidgetDefinition[] {
                 const path = folder.get_child(id);
                 const manifest = readManifest(path.get_child('widget.json'));
                 if (!manifest || manifest.apiVersion !== 1 || manifest.id !== id || typeof manifest.name !== 'string') continue;
-                found.set(id, {...manifest, apiVersion: 1, id, name: manifest.name, directory: path, width: Math.max(120, Math.min(600, Number(manifest.width) || 240)),
+                found.set(id, {...manifest, apiVersion: 1, id, name: root === `${extensionPath}/desktop/widgets` ? _(manifest.name) : manifest.name,
+                    description: typeof manifest.description === 'string' && root === `${extensionPath}/desktop/widgets` ? _(manifest.description) : manifest.description,
+                    settings: root === `${extensionPath}/desktop/widgets` ? translateManifestFields(manifest.settings) : manifest.settings, directory: path, width: Math.max(120, Math.min(600, Number(manifest.width) || 240)),
                     height: Math.max(80, Math.min(600, Number(manifest.height) || 160))});
             }
         } finally { entries.close(null); }

@@ -1,3 +1,4 @@
+import {_, formatText} from '../i18n.js';
 import {bindSwitcherSurface} from './switcherSurface.js';
 import {switcherLayout, adjacentRow} from './switcherLayout.js';
 import Clutter from 'gi://Clutter';
@@ -142,7 +143,7 @@ const LunaSwitcherPopup = GObject.registerClass(class LunaSwitcherPopup extends 
             if (!entry.group && entry.window.can_close()) {
                 const close = new St.Button({child: new St.Icon({icon_name: 'window-close-symbolic', icon_size: 16}),
                     width: 20, height: 20, opacity: 0, reactive: false, can_focus: false,
-                    accessible_name: `Close ${title}`, style: 'padding: 0; border-radius: 3px;'});
+                    accessible_name: formatText(_("Close %s"), title), style: 'padding: 0; border-radius: 3px;'});
                 header.add_child(close);
                 button._closeButton = close;
                 button.connect('notify::hover', () => {

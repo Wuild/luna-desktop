@@ -1,3 +1,4 @@
+import {_} from '../i18n.js';
 import Gio from 'gi://Gio';
 import GioUnix from 'gi://GioUnix';
 import GLib from 'gi://GLib';
@@ -51,7 +52,7 @@ export async function removeDesktopLauncher(appInfo, directory = desktopDirector
 export async function addDesktopLauncher(appInfo, directory = null) {
     const filename = appInfo?.get_filename();
     const id = appInfo?.get_id();
-    if (!filename || !id) throw new Error('This application has no installed launcher');
+    if (!filename || !id) throw new Error(_('This application has no installed launcher'));
     directory ??= desktopDirectory();
     const existing = findDesktopLauncher(appInfo, directory);
     if (existing) return existing;
@@ -86,5 +87,5 @@ export async function addDesktopLauncher(appInfo, directory = null) {
         catch { /* LunaDesktop resolves the installed app even without GVfs metadata. */ }
         return file;
     }
-    throw new Error('Too many desktop files with this application name');
+    throw new Error(_('Too many desktop files with this application name'));
 }

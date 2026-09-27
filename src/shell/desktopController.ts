@@ -1,3 +1,4 @@
+import {_} from '../i18n.js';
 import {OverviewWidgets} from './overviewWidgets.js';
 import type {DesktopSettings} from '../settings/settings.js';
 interface WorkArea {x: number; y: number; width: number; height: number;}
@@ -52,7 +53,7 @@ export class DesktopController {
         if (conflict) {
             this._stop();
             if (conflict && this._settings.get_boolean('desktop-icons-enabled') && !this._notified)
-                Main.notify('Desktop icons', 'Turn off the other desktop-icons extension to use Luna - Desktop’s desktop icons.');
+                Main.notify(_('Desktop icons'), _('Turn off the other desktop-icons extension to use Luna - Desktop’s desktop icons.'));
             this._notified = conflict;
             return;
         }
@@ -74,11 +75,11 @@ export class DesktopController {
                 if (this._process !== process) return;
                 this._process = this._client = null;
                 if (!this._destroyed)
-                    Main.notify('Desktop stopped', 'Toggle a desktop feature in settings to restart the desktop.');
+                    Main.notify(_('Desktop stopped'), _('Toggle a desktop feature in settings to restart the desktop.'));
             });
         } catch (e) {
             console.error(e);
-            Main.notify('Desktop icons could not start', e instanceof Error ? e.message : String(e));
+            Main.notify(_('Desktop icons could not start'), e instanceof Error ? e.message : String(e));
         } finally {
             launcher.close();
         }

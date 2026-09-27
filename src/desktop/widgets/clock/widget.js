@@ -1,3 +1,4 @@
+import {_} from '../../../i18n.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import GLib from 'gi://GLib';
 import {applyTextStyle} from '../textStyle.js';
@@ -14,7 +15,8 @@ export function create(context) {
     const update = () => {
         const now = GLib.DateTime.new_now_local();
         time.set_markup(`<span size="${size * 1024}">${now.format(context.options.format === '12h' ? '%I:%M %p' : '%H:%M')}</span>`);
-        date.label = now.format('%A, %e %B %Y');
+        // Translators: GLib date format; keep the % directives valid.
+        date.label = now.format(_('%A, %e %B %Y'));
     };
     update(); context.every(1000, update);
     return box;

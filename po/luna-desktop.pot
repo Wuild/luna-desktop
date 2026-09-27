@@ -1,0 +1,1653 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Wuild
+# This file is distributed under the same license as the luna-desktop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: luna-desktop\n"
+"Report-Msgid-Bugs-To: https://github.com/wuild\n"
+"POT-Creation-Date: 2026-09-27 21:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: po/widget-strings.js:3
+msgid "Calendar"
+msgstr ""
+
+#: po/widget-strings.js:4
+msgid "Month view and a personal agenda"
+msgstr ""
+
+#: po/widget-strings.js:5
+msgid "Show week numbers"
+msgstr ""
+
+#: po/widget-strings.js:6
+msgid "Show agenda"
+msgstr ""
+
+#: po/widget-strings.js:8
+msgid "Clock"
+msgstr ""
+
+#: po/widget-strings.js:9
+msgid "Local time and date"
+msgstr ""
+
+#: po/widget-strings.js:10
+msgid "Time format"
+msgstr ""
+
+#: po/widget-strings.js:11
+msgid "24 hour"
+msgstr ""
+
+#: po/widget-strings.js:12
+msgid "12 hour"
+msgstr ""
+
+#: po/widget-strings.js:13
+msgid "Show date"
+msgstr ""
+
+#: po/widget-strings.js:14
+msgid "Clock text size"
+msgstr ""
+
+#: po/widget-strings.js:15 po/widget-strings.js:32 po/widget-strings.js:108
+#: po/widget-strings.js:129
+msgid "Text shadow"
+msgstr ""
+
+#: po/widget-strings.js:16 po/widget-strings.js:33 po/widget-strings.js:87
+#: po/widget-strings.js:109 po/widget-strings.js:130
+msgid "Shadow opacity (%)"
+msgstr ""
+
+#: po/widget-strings.js:17 po/widget-strings.js:31 po/widget-strings.js:85
+#: po/widget-strings.js:107 po/widget-strings.js:128
+msgid "Text color"
+msgstr ""
+
+#: po/widget-strings.js:19 src/desktop/widgets/now-playing/widget.js:19
+#: src/desktop/widgets/now-playing/widget.js:105
+msgid "Now Playing"
+msgstr ""
+
+#: po/widget-strings.js:20
+msgid "Album artwork, track details, and optional playback controls"
+msgstr ""
+
+#: po/widget-strings.js:21
+msgid "Hide when nothing is playing"
+msgstr ""
+
+#: po/widget-strings.js:22
+msgid "Preferred player (blank = automatic)"
+msgstr ""
+
+#: po/widget-strings.js:23
+msgid "Excluded apps (comma-separated names or IDs)"
+msgstr ""
+
+#: po/widget-strings.js:24
+msgid "Show playing app name and icon"
+msgstr ""
+
+#: po/widget-strings.js:25
+msgid "Show album artwork"
+msgstr ""
+
+#: po/widget-strings.js:26
+msgid "Album artwork size"
+msgstr ""
+
+#: po/widget-strings.js:27
+msgid "Show album name"
+msgstr ""
+
+#: po/widget-strings.js:28
+msgid "Show playback controls"
+msgstr ""
+
+#: po/widget-strings.js:29
+msgid "Reveal controls on hover"
+msgstr ""
+
+#: po/widget-strings.js:30
+msgid "Track title size"
+msgstr ""
+
+#: po/widget-strings.js:34
+msgid "Audio visualizer (selected app)"
+msgstr ""
+
+#: po/widget-strings.js:35
+msgid "Visualizer placement"
+msgstr ""
+
+#: po/widget-strings.js:36
+msgid "Below track details"
+msgstr ""
+
+#: po/widget-strings.js:37
+msgid "Widget background"
+msgstr ""
+
+#: po/widget-strings.js:38
+msgid "Visualizer updates per second"
+msgstr ""
+
+#: po/widget-strings.js:39
+msgid "Visualizer sensitivity (%)"
+msgstr ""
+
+#: po/widget-strings.js:40
+msgid "Visualizer bars"
+msgstr ""
+
+#: po/widget-strings.js:41
+msgid "Visualizer height"
+msgstr ""
+
+#: po/widget-strings.js:42
+msgid "Visualizer color mode"
+msgstr ""
+
+#: po/widget-strings.js:43
+msgid "Green → yellow → red"
+msgstr ""
+
+#: po/widget-strings.js:44
+msgid "Solid color"
+msgstr ""
+
+#: po/widget-strings.js:45
+msgid "Album artwork"
+msgstr ""
+
+#: po/widget-strings.js:46
+msgid "Solid / fallback color"
+msgstr ""
+
+#: po/widget-strings.js:48 src/desktop/widgets/quick-links/widget.js:9
+msgid "Quick Links"
+msgstr ""
+
+#: po/widget-strings.js:49
+msgid "Open favorite apps, folders, files, and websites"
+msgstr ""
+
+#: po/widget-strings.js:50
+msgid "Show labels"
+msgstr ""
+
+#: po/widget-strings.js:52
+msgid "Resources"
+msgstr ""
+
+#: po/widget-strings.js:53
+msgid "CPU, GPU and memory usage rings"
+msgstr ""
+
+#: po/widget-strings.js:54
+msgid "Progress rings"
+msgstr ""
+
+#: po/widget-strings.js:55
+msgid "Separate rings"
+msgstr ""
+
+#: po/widget-strings.js:56
+msgid "Concentric rings"
+msgstr ""
+
+#: po/widget-strings.js:57
+msgid "Ring arrangement"
+msgstr ""
+
+#: po/widget-strings.js:58
+msgid "Automatic wrapping"
+msgstr ""
+
+#: po/widget-strings.js:59
+msgid "Horizontal"
+msgstr ""
+
+#: po/widget-strings.js:60
+msgid "Vertical"
+msgstr ""
+
+#: po/widget-strings.js:61
+msgid "Ring shape"
+msgstr ""
+
+#: po/widget-strings.js:62
+msgid "Full circle"
+msgstr ""
+
+#: po/widget-strings.js:63
+msgid "Three-quarter circle"
+msgstr ""
+
+#: po/widget-strings.js:64
+msgid "Half circle"
+msgstr ""
+
+#: po/widget-strings.js:65
+msgid "Quarter circle"
+msgstr ""
+
+#: po/widget-strings.js:66
+msgid "Custom arc"
+msgstr ""
+
+#: po/widget-strings.js:67
+msgid "Custom arc (degrees)"
+msgstr ""
+
+#: po/widget-strings.js:68
+msgid "Rotation (degrees)"
+msgstr ""
+
+#: po/widget-strings.js:69
+msgid "Show cpu ring"
+msgstr ""
+
+#: po/widget-strings.js:70
+msgid "Show gpu ring"
+msgstr ""
+
+#: po/widget-strings.js:71
+msgid "Show memory ring"
+msgstr ""
+
+#: po/widget-strings.js:72
+msgid "Show swap ring"
+msgstr ""
+
+#: po/widget-strings.js:73
+msgid "Show disk usage ring"
+msgstr ""
+
+#: po/widget-strings.js:74
+msgid "Show download speed ring"
+msgstr ""
+
+#: po/widget-strings.js:75
+msgid "Show upload speed ring"
+msgstr ""
+
+#: po/widget-strings.js:76
+msgid "Show battery ring"
+msgstr ""
+
+#: po/widget-strings.js:77
+msgid "Ring diameter"
+msgstr ""
+
+#: po/widget-strings.js:78
+msgid "Ring thickness"
+msgstr ""
+
+#: po/widget-strings.js:79
+msgid "Concentric ring spacing"
+msgstr ""
+
+#: po/widget-strings.js:80
+msgid "Show metric names"
+msgstr ""
+
+#: po/widget-strings.js:81
+msgid "Show value text"
+msgstr ""
+
+#: po/widget-strings.js:82
+msgid "CPU color"
+msgstr ""
+
+#: po/widget-strings.js:83
+msgid "GPU color"
+msgstr ""
+
+#: po/widget-strings.js:84
+msgid "Memory color"
+msgstr ""
+
+#: po/widget-strings.js:86
+msgid "Shadows"
+msgstr ""
+
+#: po/widget-strings.js:88
+msgid "Update interval (ms)"
+msgstr ""
+
+#: po/widget-strings.js:89
+msgid "Swap color"
+msgstr ""
+
+#: po/widget-strings.js:90
+msgid "Disk usage color"
+msgstr ""
+
+#: po/widget-strings.js:91
+msgid "Download speed color"
+msgstr ""
+
+#: po/widget-strings.js:92
+msgid "Upload speed color"
+msgstr ""
+
+#: po/widget-strings.js:93
+msgid "Battery color"
+msgstr ""
+
+#: po/widget-strings.js:94
+msgid "Disk path (blank uses Home)"
+msgstr ""
+
+#: po/widget-strings.js:95
+msgid "Network interface (auto or name)"
+msgstr ""
+
+#: po/widget-strings.js:96
+msgid "Full network ring speed (Mbps)"
+msgstr ""
+
+#: po/widget-strings.js:98
+msgid "Sticky Note"
+msgstr ""
+
+#: po/widget-strings.js:99
+msgid "Click to write; add multiple independent notes in Edit Desktop"
+msgstr ""
+
+#: po/widget-strings.js:100
+msgid "Title"
+msgstr ""
+
+#: po/widget-strings.js:101
+msgid "Show title"
+msgstr ""
+
+#: po/widget-strings.js:102
+msgid "Text size"
+msgstr ""
+
+#: po/widget-strings.js:103
+msgid "Text alignment"
+msgstr ""
+
+#: po/widget-strings.js:104 po/widget-strings.js:138
+msgid "Left"
+msgstr ""
+
+#: po/widget-strings.js:105 po/widget-strings.js:139
+msgid "Center"
+msgstr ""
+
+#: po/widget-strings.js:106 po/widget-strings.js:140
+msgid "Right"
+msgstr ""
+
+#: po/widget-strings.js:111 src/desktop/widgets/storage/widget.js:8
+msgid "Storage"
+msgstr ""
+
+#: po/widget-strings.js:112
+msgid "Drive capacity, free space, and folder shortcuts"
+msgstr ""
+
+#: po/widget-strings.js:113
+msgid "Show Home storage"
+msgstr ""
+
+#: po/widget-strings.js:114
+msgid "Show system drive"
+msgstr ""
+
+#: po/widget-strings.js:115
+msgid "Show mounted drives"
+msgstr ""
+
+#: po/widget-strings.js:117 src/desktop/widgets/weather/widget.js:19
+msgid "Weather"
+msgstr ""
+
+#: po/widget-strings.js:118
+msgid "Current conditions and a three-day forecast from Open-Meteo"
+msgstr ""
+
+#: po/widget-strings.js:119
+msgid "Fit height to visible content"
+msgstr ""
+
+#: po/widget-strings.js:120
+msgid "City"
+msgstr ""
+
+#: po/widget-strings.js:121
+msgid "Country code (optional, e.g. SE)"
+msgstr ""
+
+#: po/widget-strings.js:122
+msgid "Temperature units"
+msgstr ""
+
+#: po/widget-strings.js:123
+msgid "Celsius"
+msgstr ""
+
+#: po/widget-strings.js:124
+msgid "Fahrenheit"
+msgstr ""
+
+#: po/widget-strings.js:125
+msgid "Show three-day forecast"
+msgstr ""
+
+#: po/widget-strings.js:126
+msgid "Show feels-like temperature and wind"
+msgstr ""
+
+#: po/widget-strings.js:127
+msgid "Temperature size"
+msgstr ""
+
+#: po/widget-strings.js:131
+msgid "Show location"
+msgstr ""
+
+#: po/widget-strings.js:132
+msgid "Show condition text"
+msgstr ""
+
+#: po/widget-strings.js:133
+msgid "Show update time"
+msgstr ""
+
+#: po/widget-strings.js:134
+msgid "Show Open-Meteo credit"
+msgstr ""
+
+#: po/widget-strings.js:135
+msgid "Show weather icons"
+msgstr ""
+
+#: po/widget-strings.js:136
+msgid "Current weather icon size"
+msgstr ""
+
+#: po/widget-strings.js:137
+msgid "Content alignment"
+msgstr ""
+
+#: src/desktop/app.js:58 src/desktop/app.js:60
+msgid "Rename"
+msgstr ""
+
+#: src/desktop/app.js:59 src/desktop/app.js:99 src/desktop/widgetHost.js:102
+#: src/desktop/widgets/quick-links/widget.js:47
+msgid "Cancel"
+msgstr ""
+
+#: src/desktop/app.js:98
+msgid "New folder"
+msgstr ""
+
+#: src/desktop/app.js:100
+msgid "Create"
+msgstr ""
+
+#: src/desktop/app.js:102
+msgid "New Folder"
+msgstr ""
+
+#: src/desktop/app.js:203
+msgid "Open"
+msgstr ""
+
+#: src/desktop/app.js:204
+msgid "Copy"
+msgstr ""
+
+#: src/desktop/app.js:204
+msgid "Cut"
+msgstr ""
+
+#: src/desktop/app.js:205
+msgid "Rename…"
+msgstr ""
+
+#: src/desktop/app.js:206
+msgid "Move to Trash"
+msgstr ""
+
+#: src/desktop/app.js:207
+msgid "Properties"
+msgstr ""
+
+#: src/desktop/app.js:209
+msgid "Eject"
+msgstr ""
+
+#: src/desktop/app.js:209
+msgid "Unmount"
+msgstr ""
+
+#: src/desktop/app.js:258
+msgid "Arrange your desktop"
+msgstr ""
+
+#: src/desktop/app.js:260
+msgid "Drag anywhere on a widget · Esc to finish"
+msgstr ""
+
+#: src/desktop/app.js:263
+msgid "Add widget"
+msgstr ""
+
+#: src/desktop/app.js:272 src/desktop/app.js:278
+#, javascript-format
+msgid "%s · Added"
+msgstr ""
+
+#: src/desktop/app.js:287 src/desktop/widgetSettings.js:39
+msgid "Done"
+msgstr ""
+
+#: src/desktop/app.js:487 src/desktop/widgets/storage/widget.js:17
+msgid "Home"
+msgstr ""
+
+#: src/desktop/app.js:488
+msgid "Trash"
+msgstr ""
+
+#: src/desktop/app.js:545
+msgid "Edit Desktop"
+msgstr ""
+
+#: src/desktop/app.js:545
+msgid "Finish Editing"
+msgstr ""
+
+#: src/desktop/app.js:546
+msgid "New Folder…"
+msgstr ""
+
+#: src/desktop/app.js:547
+msgid "Paste"
+msgstr ""
+
+#: src/desktop/app.js:548
+msgid "Select All"
+msgstr ""
+
+#: src/desktop/app.js:549
+msgid "Arrange Icons"
+msgstr ""
+
+#: src/desktop/app.js:550
+msgid "Modified"
+msgstr ""
+
+#: src/desktop/app.js:550 src/preferences/icons.ts:19
+msgid "Name"
+msgstr ""
+
+#: src/desktop/app.js:550 src/preferences/icons.ts:19
+msgid "Size"
+msgstr ""
+
+#: src/desktop/app.js:550
+msgid "Sort By"
+msgstr ""
+
+#: src/desktop/app.js:550 src/preferences/icons.ts:19
+msgid "Type"
+msgstr ""
+
+#: src/desktop/app.js:553 src/desktop/widgetSettings.js:59 src/prefs.ts:18
+msgid "Layout"
+msgstr ""
+
+#: src/desktop/app.js:554
+msgid "Snap to Grid"
+msgstr ""
+
+#: src/desktop/app.js:554
+msgid "Turn Off Grid Snapping"
+msgstr ""
+
+#: src/desktop/app.js:555
+msgid "Hide Hidden Files"
+msgstr ""
+
+#: src/desktop/app.js:555
+msgid "Show Hidden Files"
+msgstr ""
+
+#: src/desktop/app.js:556
+msgid "Hide Widgets"
+msgstr ""
+
+#: src/desktop/app.js:556
+msgid "Show Widgets"
+msgstr ""
+
+#: src/desktop/app.js:558
+msgid "Open Desktop in Files"
+msgstr ""
+
+#: src/desktop/app.js:560
+msgid "Desktop Settings"
+msgstr ""
+
+#: src/desktop/fileActions.js:85
+msgid "Clipboard file list is too large"
+msgstr ""
+
+#: src/desktop/fileActions.js:96
+msgid "Cannot copy a folder into itself"
+msgstr ""
+
+#: src/desktop/launchers.js:55
+msgid "This application has no installed launcher"
+msgstr ""
+
+#: src/desktop/launchers.js:90
+msgid "Too many desktop files with this application name"
+msgstr ""
+
+#: src/desktop/wallpaper.js:6
+msgid "Change wallpaper"
+msgstr ""
+
+#: src/desktop/widgetHost.js:100
+msgid "Remove note?"
+msgstr ""
+
+#: src/desktop/widgetHost.js:101
+msgid "Remove this note from the desktop?"
+msgstr ""
+
+#: src/desktop/widgetHost.js:103
+msgid "Remove"
+msgstr ""
+
+#: src/desktop/widgetHost.js:140
+msgid "Remove widget"
+msgstr ""
+
+#: src/desktop/widgetHost.js:143
+msgid "Customize widget"
+msgstr ""
+
+#: src/desktop/widgetHost.js:325
+#, javascript-format
+msgid "%s could not load"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:38
+#, javascript-format
+msgid "Customize %s"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:41
+msgid "Width"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:42
+msgid "Fixed height"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:42
+msgid "Height"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:43
+msgid "Widget opacity (%)"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:44
+msgid "Show background"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:45 src/prefs.ts:41
+msgid "Background color"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:46
+msgid "Background opacity (%)"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:47 src/prefs.ts:45
+msgid "Corner radius"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:48
+msgid "Allow hover and button controls"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:57
+msgid "Choose what this widget shows."
+msgstr ""
+
+#: src/desktop/widgetSettings.js:57
+msgid "Content"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:58 src/prefs.ts:19 src/prefs.ts:39
+msgid "Appearance"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:58
+msgid "Colors, text, and background."
+msgstr ""
+
+#: src/desktop/widgetSettings.js:59
+msgid "Size and arrangement on your desktop."
+msgstr ""
+
+#: src/desktop/widgetSettings.js:60
+msgid "Advanced"
+msgstr ""
+
+#: src/desktop/widgetSettings.js:60
+msgid "Optional behavior and fine-tuning."
+msgstr ""
+
+#: src/desktop/widgets/calendar/widget.js:13
+msgid "Personal agenda"
+msgstr ""
+
+#: src/desktop/widgets/calendar/widget.js:14
+#: src/desktop/widgets/weather/widget.js:54
+msgid "Today"
+msgstr ""
+
+#: src/desktop/widgets/calendar/widget.js:18
+msgid "Add an event on the selected date…"
+msgstr ""
+
+#: src/desktop/widgets/calendar/widget.js:19
+msgid "Add event"
+msgstr ""
+
+#: src/desktop/widgets/calendar/widget.js:30
+msgid "No upcoming events"
+msgstr ""
+
+#: src/desktop/widgets/calendar/widget.js:36
+msgid "Remove event"
+msgstr ""
+
+#. Translators: GLib date format; keep the % directives valid.
+#: src/desktop/widgets/clock/widget.js:19
+msgid "%A, %e %B %Y"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/audioCapture.js:58
+msgid "Waiting for selected app audio"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/audioCapture.js:62
+msgid ""
+"Audio server unavailable (requires PulseAudio or PipeWire PulseAudio support)"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/audioCapture.js:73
+msgid "Live spectrum of the selected app"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/audioCapture.js:78
+msgid "Player audio capture stopped; retrying"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/visualizer.js:41
+msgid "Audio visualizer requires pactl and parec"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:36
+msgid "Next track"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:36
+msgid "Play or pause"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:36
+msgid "Previous track"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:41
+msgid "Player did not accept this control"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:109
+msgid "No track information"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:109
+#: src/desktop/widgets/now-playing/widget.js:122
+msgid "Nothing playing"
+msgstr ""
+
+#: src/desktop/widgets/now-playing/widget.js:119
+msgid "Media players unavailable"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:10
+msgid "Add a link"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:21
+msgid "Add your favorite apps and places."
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:24
+#, javascript-format
+msgid ""
+"%s\n"
+"Right-click to remove"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:37
+msgid "Remove link"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:46
+msgid "Add quick link"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:48
+msgid "Add"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:50
+msgid "Application"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:50
+msgid "File or folder"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:50
+msgid "Website"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:53
+msgid "Name (optional)"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:54
+#: src/desktop/widgets/quick-links/widget.js:59
+msgid "File or folder path"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:55
+msgid "Browse…"
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:69
+#, javascript-format
+msgid "Enter a website starting with %s or %s."
+msgstr ""
+
+#: src/desktop/widgets/quick-links/widget.js:72
+msgid "Choose a file or enter a folder path."
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "BAT"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "CPU"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "DISK"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "DOWN"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "GPU"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "MEM"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "SWAP"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:10
+msgid "UP"
+msgstr ""
+
+#: src/desktop/widgets/resources/widget.js:23
+msgid "Choose rings in Customize"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:16
+msgid "Drag to move note"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:18
+msgid "Note"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:21
+msgid "Note color, size, and appearance"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:23
+msgid "Finish typing (Escape)"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:25
+msgid "Remove note"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:51
+msgid "Make selected text bold"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:51
+msgid "Make selected text italic"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:51
+msgid "Underline selected text"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:56
+msgid "Click to write a note; Escape to finish"
+msgstr ""
+
+#: src/desktop/widgets/sticky-note/widget.js:122
+msgid "Drag to resize note"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:18
+msgid "System"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:23
+msgid "No drives selected"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:25
+#, javascript-format
+msgid "Open %s"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:31
+msgid "Checking space…"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:38
+msgid "Capacity unavailable"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:40
+#, javascript-format
+msgid "%s free of %s"
+msgstr ""
+
+#: src/desktop/widgets/storage/widget.js:41
+msgid "Drive unavailable"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:27
+msgid "Weather data by Open-Meteo"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:45
+msgid "Missing weather data"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:49
+#, javascript-format
+msgid "Feels like %s · Wind %s km/h"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:64
+msgid "Saved weather · updating…"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:75
+msgid "City not found. Try a nearby city or country code."
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:85
+#, javascript-format
+msgid "Updated %s"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:88
+msgid "Offline · showing saved weather"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:88
+#, javascript-format
+msgid "Weather unavailable: %s"
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:91
+msgid "Set your city in Edit Desktop → Customize."
+msgstr ""
+
+#: src/desktop/widgets/weather/widget.js:93
+msgid "Loading weather…"
+msgstr ""
+
+#: src/preferences/controls.ts:26 src/preferences/widgets.ts:12
+msgid "Logical pixels"
+msgstr ""
+
+#: src/preferences/icons.ts:8 src/shell/desktopController.ts:56
+msgid "Desktop icons"
+msgstr ""
+
+#: src/preferences/icons.ts:9
+msgid "Choose what appears on your desktop."
+msgstr ""
+
+#: src/preferences/icons.ts:10
+msgid "Enable desktop icons"
+msgstr ""
+
+#: src/preferences/icons.ts:11
+msgid "Show Home"
+msgstr ""
+
+#: src/preferences/icons.ts:12
+msgid "Show Trash"
+msgstr ""
+
+#: src/preferences/icons.ts:13
+msgid "Show hidden files"
+msgstr ""
+
+#: src/preferences/icons.ts:14
+msgid "Otherwise, double click to open an item"
+msgstr ""
+
+#: src/preferences/icons.ts:14
+msgid "Single click to open"
+msgstr ""
+
+#: src/preferences/icons.ts:15
+msgid "Displays"
+msgstr ""
+
+#: src/preferences/icons.ts:15
+msgid "Icon placement"
+msgstr ""
+
+#: src/preferences/icons.ts:16
+msgid "All displays"
+msgstr ""
+
+#: src/preferences/icons.ts:16
+msgid ""
+"New icons start on the primary display. Drag icons between displays to move "
+"them; positions are remembered"
+msgstr ""
+
+#: src/preferences/icons.ts:16
+msgid "Primary display only"
+msgstr ""
+
+#: src/preferences/icons.ts:17
+msgid "Arrange icons"
+msgstr ""
+
+#: src/preferences/icons.ts:18
+msgid "Drives"
+msgstr ""
+
+#: src/preferences/icons.ts:19
+msgid "Changing the sort order rearranges icons"
+msgstr ""
+
+#: src/preferences/icons.ts:19
+msgid "Last modified"
+msgstr ""
+
+#: src/preferences/icons.ts:19
+msgid "Sort icons by"
+msgstr ""
+
+#: src/preferences/icons.ts:20
+msgid "Snap icons to grid"
+msgstr ""
+
+#: src/preferences/icons.ts:21
+msgid "Highlight drop targets"
+msgstr ""
+
+#: src/preferences/icons.ts:22
+msgid "Mounted removable drives and external storage"
+msgstr ""
+
+#: src/preferences/icons.ts:22
+msgid "Show external drives"
+msgstr ""
+
+#: src/preferences/icons.ts:23
+msgid "Mounted network locations"
+msgstr ""
+
+#: src/preferences/icons.ts:23
+msgid "Show network drives"
+msgstr ""
+
+#: src/preferences/icons.ts:24
+msgid "Place new drives on the opposite side"
+msgstr ""
+
+#: src/preferences/icons.ts:25
+msgid "Icons and labels"
+msgstr ""
+
+#: src/preferences/icons.ts:26
+msgid "Icon size"
+msgstr ""
+
+#: src/preferences/icons.ts:27
+msgid "Label size"
+msgstr ""
+
+#: src/preferences/icons.ts:28
+msgid "Label height"
+msgstr ""
+
+#: src/preferences/icons.ts:28
+msgid "Rows; longer names are shortened with an ellipsis"
+msgstr ""
+
+#: src/preferences/icons.ts:29
+msgid "Fine-tune the space used by each icon."
+msgstr ""
+
+#: src/preferences/icons.ts:29
+msgid "Spacing"
+msgstr ""
+
+#: src/preferences/icons.ts:30
+msgid "All desktop buttons use the same width; icons must fit inside"
+msgstr ""
+
+#: src/preferences/icons.ts:30
+msgid "Button width"
+msgstr ""
+
+#: src/preferences/icons.ts:31
+msgid "Button padding"
+msgstr ""
+
+#: src/preferences/icons.ts:31
+msgid "Space inside each desktop button"
+msgstr ""
+
+#: src/preferences/icons.ts:32
+msgid "Button spacing"
+msgstr ""
+
+#: src/preferences/icons.ts:32
+msgid "Space between desktop buttons on the grid"
+msgstr ""
+
+#: src/preferences/icons.ts:33
+msgid "Arrange from"
+msgstr ""
+
+#: src/preferences/icons.ts:35
+msgid "Bottom left"
+msgstr ""
+
+#: src/preferences/icons.ts:35
+msgid "Bottom right"
+msgstr ""
+
+#: src/preferences/icons.ts:35
+msgid ""
+"Starting corner for new icons and Arrange; existing positions stay where you "
+"put them"
+msgstr ""
+
+#: src/preferences/icons.ts:35
+msgid "Top left"
+msgstr ""
+
+#: src/preferences/icons.ts:35
+msgid "Top right"
+msgstr ""
+
+#: src/preferences/icons.ts:36
+msgid "Selection corner radius"
+msgstr ""
+
+#: src/preferences/icons.ts:37
+msgid "Improve readability over wallpaper"
+msgstr ""
+
+#: src/preferences/icons.ts:37
+msgid "Label shadow"
+msgstr ""
+
+#: src/preferences/icons.ts:38
+msgid "Override label color"
+msgstr ""
+
+#: src/preferences/icons.ts:39
+msgid "Label color"
+msgstr ""
+
+#: src/preferences/icons.ts:40
+msgid "Selection accent color"
+msgstr ""
+
+#: src/preferences/icons.ts:41
+msgid "Add or remove desktop shortcuts from GNOME application menus"
+msgstr ""
+
+#: src/preferences/icons.ts:41
+msgid "Application menu shortcuts"
+msgstr ""
+
+#: src/preferences/icons.ts:42
+msgid "Arrange desktop icons"
+msgstr ""
+
+#: src/preferences/icons.ts:42
+msgid "Reset custom icon positions to a grid"
+msgstr ""
+
+#: src/preferences/icons.ts:43
+msgid "Arrange"
+msgstr ""
+
+#: src/preferences/navigation.ts:34 src/preferences/navigation.ts:146
+msgid "Search settings"
+msgstr ""
+
+#: src/preferences/navigation.ts:53 src/preferences/navigation.ts:72
+#: src/prefs.ts:16
+msgid "Desktop settings"
+msgstr ""
+
+#: src/preferences/navigation.ts:53
+msgid "Luna - Desktop"
+msgstr ""
+
+#: src/preferences/navigation.ts:55 src/prefs.ts:17
+msgid "Desktop Icons"
+msgstr ""
+
+#: src/preferences/navigation.ts:57
+msgid "Show categories"
+msgstr ""
+
+#: src/preferences/navigation.ts:73
+msgid "Settings"
+msgstr ""
+
+#: src/preferences/navigation.ts:76
+msgid "Search results"
+msgstr ""
+
+#: src/preferences/navigation.ts:145
+msgid "No matching settings"
+msgstr ""
+
+#: src/preferences/navigation.ts:145
+#, javascript-format
+msgid "Search results (%s)"
+msgstr ""
+
+#: src/preferences/widgets.ts:7
+msgid ""
+"Right-click the desktop and choose Edit Desktop to add and arrange widgets."
+msgstr ""
+
+#: src/preferences/widgets.ts:7 src/prefs.ts:49
+msgid "Widgets"
+msgstr ""
+
+#: src/preferences/widgets.ts:8
+msgid "Show desktop widgets"
+msgstr ""
+
+#: src/preferences/widgets.ts:9
+msgid "Placement"
+msgstr ""
+
+#: src/preferences/widgets.ts:10
+msgid "Align widget edges and centers with nearby widgets and the screen"
+msgstr ""
+
+#: src/preferences/widgets.ts:10
+msgid "Snap widgets into alignment"
+msgstr ""
+
+#: src/preferences/widgets.ts:11
+msgid "Minimum gap in logical pixels; 0 allows widgets against the edge"
+msgstr ""
+
+#: src/preferences/widgets.ts:11
+msgid "Screen-edge spacing"
+msgstr ""
+
+#: src/preferences/widgets.ts:12
+msgid "Snapping distance"
+msgstr ""
+
+#: src/prefs.ts:22
+msgid "Tiling"
+msgstr ""
+
+#: src/prefs.ts:23
+msgid ""
+"Snap windows to edges and corners, then choose apps for the remaining tiles. "
+"Drag the shared divider to resize a group."
+msgstr ""
+
+#: src/prefs.ts:23
+msgid "Window tiling"
+msgstr ""
+
+#: src/prefs.ts:24
+msgid "Enable window tiling"
+msgstr ""
+
+#: src/prefs.ts:24
+msgid "Replaces GNOME edge tiling while enabled."
+msgstr ""
+
+#: src/prefs.ts:25
+msgid "Drag a window to the top of a monitor to reveal layouts."
+msgstr ""
+
+#: src/prefs.ts:25
+msgid "Top layout bar"
+msgstr ""
+
+#: src/prefs.ts:26
+msgid "Suggest windows for empty tiles"
+msgstr ""
+
+#: src/prefs.ts:27
+msgid ""
+"Logical pixels between windows and at the screen edges. Set to 0 for no gaps."
+msgstr ""
+
+#: src/prefs.ts:27
+msgid "Window spacing"
+msgstr ""
+
+#: src/prefs.ts:29
+msgid "Square corners while tiled (experimental)"
+msgstr ""
+
+#: src/prefs.ts:30
+msgid "Requires the optional native tiling helper."
+msgstr ""
+
+#: src/prefs.ts:30
+msgid ""
+"Uses maximized appearance inside tiles. Some apps remember this and open new "
+"windows maximized. Off by default."
+msgstr ""
+
+#: src/prefs.ts:32
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: src/prefs.ts:32
+msgid ""
+"Super+Z: layout chooser (Tab and Enter to choose). Super+Ctrl+Left/Right: "
+"half screen. Follow with Super+Ctrl+Up/Down for a corner. Escape dismisses "
+"the chooser."
+msgstr ""
+
+#: src/prefs.ts:33
+msgid ""
+"Hover between windows in the focused group to reveal a divider, then drag to "
+"resize the grid."
+msgstr ""
+
+#: src/prefs.ts:33
+msgid "Shared dividers"
+msgstr ""
+
+#: src/prefs.ts:35 src/prefs.ts:36
+msgid "App switcher"
+msgstr ""
+
+#: src/prefs.ts:36
+msgid "Switch between individual windows and snap groups in one view."
+msgstr ""
+
+#: src/prefs.ts:37
+msgid "Luna Alt+Tab switcher"
+msgstr ""
+
+#: src/prefs.ts:37
+msgid ""
+"Show windows and snap groups together. Selecting a group brings all its "
+"windows forward."
+msgstr ""
+
+#: src/prefs.ts:38
+msgid "Maximum panel width"
+msgstr ""
+
+#: src/prefs.ts:38
+msgid "Percentage of the monitor width. Cards wrap into rows at this limit."
+msgstr ""
+
+#: src/prefs.ts:39
+msgid ""
+"Shared with the snap layout bar. Defaults match Luna Taskbar panels, menus "
+"and window previews."
+msgstr ""
+
+#: src/prefs.ts:40
+msgid "Override theme color"
+msgstr ""
+
+#: src/prefs.ts:41
+msgid "Switcher panel background"
+msgstr ""
+
+#: src/prefs.ts:42
+msgid "Transparency and blur"
+msgstr ""
+
+#: src/prefs.ts:42
+msgid "Turn off for an opaque panel."
+msgstr ""
+
+#: src/prefs.ts:43
+msgid "0 disables blur."
+msgstr ""
+
+#: src/prefs.ts:43
+msgid "Blur strength"
+msgstr ""
+
+#: src/prefs.ts:44
+msgid "0% is transparent; 100% is opaque."
+msgstr ""
+
+#: src/prefs.ts:44
+msgid "Opacity"
+msgstr ""
+
+#: src/prefs.ts:46
+msgid "Panel padding"
+msgstr ""
+
+#: src/prefs.ts:47
+msgid "Card spacing"
+msgstr ""
+
+#: src/shell/appGridMenu.js:20 src/shell/appGridMenu.js:23
+msgid "Add to Desktop"
+msgstr ""
+
+#: src/shell/appGridMenu.js:20 src/shell/appGridMenu.js:23
+msgid "Remove from Desktop"
+msgstr ""
+
+#: src/shell/appGridMenu.js:31
+msgid "Added to Desktop"
+msgstr ""
+
+#: src/shell/appGridMenu.js:31
+msgid "Removed from Desktop"
+msgstr ""
+
+#: src/shell/appGridMenu.js:34
+msgid "Could not update desktop shortcut"
+msgstr ""
+
+#: src/shell/desktopController.ts:56
+msgid ""
+"Turn off the other desktop-icons extension to use Luna - Desktop’s desktop "
+"icons."
+msgstr ""
+
+#: src/shell/desktopController.ts:78
+msgid "Desktop stopped"
+msgstr ""
+
+#: src/shell/desktopController.ts:78
+msgid "Toggle a desktop feature in settings to restart the desktop."
+msgstr ""
+
+#: src/shell/desktopController.ts:82
+msgid "Desktop icons could not start"
+msgstr ""
+
+#: src/shell/snapLayouts.js:4
+msgid "Halves"
+msgstr ""
+
+#: src/shell/snapLayouts.js:5
+msgid "Large left"
+msgstr ""
+
+#: src/shell/snapLayouts.js:6
+msgid "Thirds"
+msgstr ""
+
+#: src/shell/snapLayouts.js:7
+msgid "Main and two"
+msgstr ""
+
+#: src/shell/snapLayouts.js:8
+msgid "Quarters"
+msgstr ""
+
+#: src/shell/snapLayouts.js:9
+msgid "Maximize"
+msgstr ""
+
+#: src/shell/snapSwitcher.js:146
+#, javascript-format
+msgid "Close %s"
+msgstr ""
+
+#: src/shell/windowPreviewCard.js:28
+#, javascript-format
+msgid "Snap group · %d window"
+msgid_plural "Snap group · %d windows"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/shell/windowPreviewCard.js:28 src/shell/windowSnapping.js:510
+msgid "Window"
+msgstr ""
+
+#: src/shell/windowSnapping.js:303
+#, javascript-format
+msgid "%s, position %s"
+msgstr ""
+
+#: src/shell/windowSnapping.js:381
+msgid "Choose a larger tile for this application."
+msgstr ""
+
+#: src/shell/windowSnapping.js:381
+msgid "Window does not fit"
+msgstr ""
+
+#: src/widgets/weather/model.ts:3
+msgid "Clear night"
+msgstr ""
+
+#: src/widgets/weather/model.ts:3
+msgid "Clear sky"
+msgstr ""
+
+#: src/widgets/weather/model.ts:4
+msgid "Mostly clear"
+msgstr ""
+
+#: src/widgets/weather/model.ts:4
+msgid "Partly cloudy"
+msgstr ""
+
+#: src/widgets/weather/model.ts:5
+msgid "Overcast"
+msgstr ""
+
+#: src/widgets/weather/model.ts:6
+msgid "Fog"
+msgstr ""
+
+#: src/widgets/weather/model.ts:7
+msgid "Drizzle"
+msgstr ""
+
+#: src/widgets/weather/model.ts:8
+msgid "Freezing rain"
+msgstr ""
+
+#: src/widgets/weather/model.ts:9
+msgid "Rain"
+msgstr ""
+
+#: src/widgets/weather/model.ts:10
+msgid "Snow"
+msgstr ""
+
+#: src/widgets/weather/model.ts:11
+msgid "Showers"
+msgstr ""
+
+#: src/widgets/weather/model.ts:12
+msgid "Thunderstorm"
+msgstr ""
+
+#: src/widgets/weather/model.ts:13
+msgid "Unknown conditions"
+msgstr ""

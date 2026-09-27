@@ -1,3 +1,4 @@
+import {_} from '../i18n.js';
 import {InjectionManager} from 'resource:///org/gnome/shell/extensions/extension.js';
 import {AppIcon} from 'resource:///org/gnome/shell/ui/appDisplay.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -16,10 +17,10 @@ export class AppGridMenu {
             const menu = this._menu;
             const existing = menu._lunaDesktopDesktopItem;
             if (existing) {
-                existing.label.text = findDesktopLauncher(app.get_app_info()) ? 'Remove from Desktop' : 'Add to Desktop';
+                existing.label.text = findDesktopLauncher(app.get_app_info()) ? _('Remove from Desktop') : _('Add to Desktop');
                 return result;
             }
-            const item = menu.addAction(findDesktopLauncher(app.get_app_info()) ? 'Remove from Desktop' : 'Add to Desktop', async () => {
+            const item = menu.addAction(findDesktopLauncher(app.get_app_info()) ? _('Remove from Desktop') : _('Add to Desktop'), async () => {
                 item.setSensitive(false);
                 try {
                     const removing = !!findDesktopLauncher(app.get_app_info());
@@ -27,10 +28,10 @@ export class AppGridMenu {
                     else await addDesktopLauncher(app.get_app_info());
                     if (!extension._destroyed) {
                         if (!removing) settings.set_boolean('desktop-icons-enabled', true);
-                        Main.notify(removing ? 'Removed from Desktop' : 'Added to Desktop', app.get_name());
+                        Main.notify(removing ? _('Removed from Desktop') : _('Added to Desktop'), app.get_name());
                     }
                 } catch (error) {
-                    if (!extension._destroyed) Main.notify('Could not update desktop shortcut', error.message);
+                    if (!extension._destroyed) Main.notify(_('Could not update desktop shortcut'), error.message);
                 } finally {
                     if (extension._items.has(item)) item.setSensitive(true);
                 }

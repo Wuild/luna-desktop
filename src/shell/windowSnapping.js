@@ -1,3 +1,4 @@
+import {_, formatText} from '../i18n.js';
 import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -299,7 +300,7 @@ export class WindowSnapping {
             layout.tiles.forEach((tile, index) => {
                 const r = frame({x: cellX, y: cellY, width: cell - 12, height: 60}, tile);
                 const actor = new St.Button({x: r.x + 2, y: r.y + 2, width: r.width - 4, height: r.height - 4,
-                    reactive: clickable, can_focus: clickable, accessible_name: `${layout.name}, position ${index + 1}`, style: tileStyle(false)});
+                    reactive: clickable, can_focus: clickable, accessible_name: formatText(_("%s, position %s"), _(layout.name), index + 1), style: tileStyle(false)});
                 St.ThemeContext.get_for_stage(global.stage).connectObject('changed', () => actor.set_style(tileStyle(actor._snapActive || actor.hover)), actor);
                 actor.track_hover = true;
                 actor.connect('notify::hover', () => actor.set_style(tileStyle(actor._snapActive || actor.hover)));
@@ -310,7 +311,7 @@ export class WindowSnapping {
                     if (this.eligible(window)) this.snap(window, monitor, li, index);
                 });
             });
-            content.add_child(new St.Label({text: layout.name, x: cellX, y: cellY + 64, style: 'font-size: 10px;'}));
+            content.add_child(new St.Label({text: _(layout.name), x: cellX, y: cellY + 64, style: 'font-size: 10px;'}));
         });
     }
     keyboardSnap(direction) {
@@ -377,7 +378,7 @@ export class WindowSnapping {
     }
     snap(w, monitor, layout, index) {
         if (!this.fits(w, this.tileFrame(this.area(monitor), layouts[layout].tiles[index]))) {
-            Main.notify('Window does not fit', 'Choose a larger tile for this application.');
+            Main.notify(_('Window does not fit'), _('Choose a larger tile for this application.'));
             return;
         }
         this.detach(w);
@@ -506,7 +507,7 @@ export class WindowSnapping {
             const scale = Math.min(availableWidth / Math.max(1, r.width), 220 / Math.max(1, r.height));
             const previewWidth = Math.round(r.width * scale), previewHeight = Math.max(56, Math.round(r.height * scale));
             const card = new St.Button({can_focus: true, track_hover: true, width: columnWidth,
-                accessible_name: w.get_title() || 'Window', style: previewButtonStyle(false)});
+                accessible_name: w.get_title() || _('Window'), style: previewButtonStyle(false)});
             const highlight = () => card.set_style(previewButtonStyle(card.hover || card.has_key_focus()));
             watchStyle(card, highlight);
             card.connect('notify::hover', highlight);

@@ -1,11 +1,12 @@
+import {N_} from '../translatable.js';
 // Normalized rectangles keep layouts independent of monitor origin and scale.
 export const layouts = [
-    {name: 'Halves', tiles: [[0, 0, .5, 1], [.5, 0, .5, 1]]},
-    {name: 'Large left', tiles: [[0, 0, 2 / 3, 1], [2 / 3, 0, 1 / 3, 1]]},
-    {name: 'Thirds', tiles: [[0, 0, 1 / 3, 1], [1 / 3, 0, 1 / 3, 1], [2 / 3, 0, 1 / 3, 1]]},
-    {name: 'Main and two', tiles: [[0, 0, .5, 1], [.5, 0, .5, .5], [.5, .5, .5, .5]]},
-    {name: 'Quarters', tiles: [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]]},
-    {name: 'Maximize', tiles: [[0, 0, 1, 1]]},
+    {name: N_('Halves'), tiles: [[0, 0, .5, 1], [.5, 0, .5, 1]]},
+    {name: N_('Large left'), tiles: [[0, 0, 2 / 3, 1], [2 / 3, 0, 1 / 3, 1]]},
+    {name: N_('Thirds'), tiles: [[0, 0, 1 / 3, 1], [1 / 3, 0, 1 / 3, 1], [2 / 3, 0, 1 / 3, 1]]},
+    {name: N_('Main and two'), tiles: [[0, 0, .5, 1], [.5, 0, .5, .5], [.5, .5, .5, .5]]},
+    {name: N_('Quarters'), tiles: [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]]},
+    {name: N_('Maximize'), tiles: [[0, 0, 1, 1]]},
 ];
 export function frame(area, tile, gap = 0) {
     const [x, y, w, h] = tile;

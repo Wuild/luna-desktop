@@ -1,8 +1,9 @@
+import {_} from '../i18n.js';
 import Gio from 'gi://Gio';
 
 export function wallpaperMenuEntries(getActivePath, onError) {
     if (!getActivePath()) return [];
-    return [['Change wallpaper', () => {
+    return [[_('Change wallpaper'), () => {
         if (!getActivePath()) return;
         try {
             Gio.Subprocess.new(['gnome-extensions', 'prefs', 'luna-wallpaper@wuild'], Gio.SubprocessFlags.NONE);

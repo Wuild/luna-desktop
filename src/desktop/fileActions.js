@@ -1,3 +1,4 @@
+import {_} from '../i18n.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
@@ -13,12 +14,12 @@ export function menu(parent, x, y, entries) {
             if (!row) { flush(); continue; }
             const [label, callback, enabled = true] = row;
             if (Array.isArray(callback)) {
-                const submenu = new Gio.Menu(); fill(submenu, callback); section.append_submenu(label, submenu); continue;
+                const submenu = new Gio.Menu(); fill(submenu, callback); section.append_submenu(_(label), submenu); continue;
             }
             const name = `item${index++}`;
             const action = new Gio.SimpleAction({name, enabled});
             action.connect('activate', () => { popup.popdown(); callback(); });
-            group.add_action(action); section.append(label, `desktop.${name}`);
+            group.add_action(action); section.append(_(label), `desktop.${name}`);
         }
         flush();
     };
@@ -81,7 +82,7 @@ export async function pasteInto(directory) {
             const bytes = await asyncCall(stream, 'read_bytes', 8192, GLib.PRIORITY_DEFAULT, null);
             if (!bytes.get_size()) break;
             length += bytes.get_size();
-            if (length > 1024 * 1024) throw new Error('Clipboard file list is too large');
+            if (length > 1024 * 1024) throw new Error(_('Clipboard file list is too large'));
             data += new TextDecoder().decode(bytes.toArray());
         }
     } finally { stream.close(null); }
@@ -92,7 +93,7 @@ export async function pasteInto(directory) {
         try {
             const source = Gio.File.new_for_uri(uri);
             if (!source.get_basename()) continue;
-            if (directory.equal(source) || directory.has_prefix(source)) throw new Error('Cannot copy a folder into itself');
+            if (directory.equal(source) || directory.has_prefix(source)) throw new Error(_('Cannot copy a folder into itself'));
             const target = directory.get_child(source.get_basename());
             // No overwrite flag: existing files are kept and conflicts reported.
             if (cut) await asyncCall(source, 'move', target, Gio.FileCopyFlags.NOFOLLOW_SYMLINKS, GLib.PRIORITY_DEFAULT, null, null);

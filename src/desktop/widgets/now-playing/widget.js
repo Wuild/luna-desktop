@@ -1,3 +1,4 @@
+import {_} from '../../../i18n.js';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import {dominantColor} from '../../../widgets/colors.js';
 import Gtk from 'gi://Gtk?version=4.0';
@@ -15,7 +16,7 @@ export function create(context) {
     const label = () => { const item = new Gtk.Label({xalign: 0, ellipsize: Pango.EllipsizeMode.END, hexpand: true}); applyTextStyle(item, options); return item; };
     const header = new Gtk.Box({spacing: 6, visible: options.showApp !== false});
     const appIcon = new Gtk.Image({icon_name: 'audio-x-generic-symbolic', pixel_size: 16});
-    const identity = label(); identity.label = 'Now Playing'; header.append(appIcon); header.append(identity);
+    const identity = label(); identity.label = _('Now Playing'); header.append(appIcon); header.append(identity);
     const row = new Gtk.Box({spacing: 12});
     const artwork = new Gtk.Image({icon_name: 'audio-x-generic-symbolic', pixel_size: Math.max(40, Math.min(160, Number(options.artSize) || 80))});
     artwork.visible = options.showArtwork !== false;
@@ -32,12 +33,12 @@ export function create(context) {
     const media = mediaClient(context), http = httpClient(context), fileCancel = new Gio.Cancellable();
     context.onDispose(() => fileCancel.cancel());
     const buttons = {};
-    for (const [method, name, tooltip] of [['Previous', 'media-skip-backward-symbolic', 'Previous track'], ['PlayPause', 'media-playback-start-symbolic', 'Play or pause'], ['Next', 'media-skip-forward-symbolic', 'Next track']]) {
+    for (const [method, name, tooltip] of [['Previous', 'media-skip-backward-symbolic', _('Previous track')], ['PlayPause', 'media-playback-start-symbolic', _('Play or pause')], ['Next', 'media-skip-forward-symbolic', _('Next track')]]) {
         const button = new Gtk.Button({icon_name: name, tooltip_text: tooltip}); button.add_css_class('flat');
         button.connect('clicked', async () => {
             if (!selected) return;
             try { await media.command(selected.name, method); if (!disposed) await update(); }
-            catch { if (!disposed) { status.label = 'Player did not accept this control'; status.visible = true; } }
+            catch { if (!disposed) { status.label = _('Player did not accept this control'); status.visible = true; } }
         });
         controls.append(button); buttons[method] = button;
     }
@@ -101,11 +102,11 @@ export function create(context) {
             context.setVisible?.(options.hideWhenIdle !== true || selected?.PlaybackStatus === 'Playing');
             spectrum?.setPlayer(selected);
             const metadata = selected?.Metadata ?? {};
-            identity.label = selected?.Identity || selected?.DesktopEntry || 'Now Playing';
+            identity.label = selected?.Identity || selected?.DesktopEntry || _('Now Playing');
             const desktop = String(selected?.DesktopEntry ?? '');
             const app = desktop ? Gio.DesktopAppInfo.new(desktop.endsWith('.desktop') ? desktop : `${desktop}.desktop`) : null;
             appIcon.gicon = app?.get_icon() ?? Gio.ThemedIcon.new('audio-x-generic-symbolic');
-            title.label = String(metadata['xesam:title'] || (selected ? 'No track information' : 'Nothing playing'));
+            title.label = String(metadata['xesam:title'] || (selected ? _('No track information') : _('Nothing playing')));
             artist.label = Array.isArray(metadata['xesam:artist']) ? metadata['xesam:artist'].join(', ') : '';
             album.label = String(metadata['xesam:album'] ?? '');
             buttons.Previous.sensitive = !!selected?.CanControl && !!selected?.CanGoPrevious;
@@ -115,10 +116,10 @@ export function create(context) {
             const art = String(metadata['mpris:artUrl'] ?? '');
             if (art !== lastArt) { lastArt = art; loadArt(art); }
             status.visible = false;
-        } catch { if (!disposed) { spectrum?.setPlayer(null); status.label = 'Media players unavailable'; status.visible = true; } }
+        } catch { if (!disposed) { spectrum?.setPlayer(null); status.label = _('Media players unavailable'); status.visible = true; } }
         finally { busy = false; }
     };
-    title.label = 'Nothing playing';
+    title.label = _(_('Nothing playing'));
     context.setVisible?.(options.hideWhenIdle !== true);
     update(); context.every(2000, update);
     return widget;

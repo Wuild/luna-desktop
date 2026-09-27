@@ -35,6 +35,7 @@ else {
     } catch (error) {
         if (error.code !== 'ENOENT') throw error;
     }
+    execFileSync('python3', [path.join(root, 'scripts/translations.py'), 'compile', '--output', path.join(dist, 'locale')], {stdio: 'inherit'});
     execFileSync('glib-compile-schemas', ['--strict', path.join(dist, 'schemas')], {stdio: 'inherit'});
     await writeFile(path.join(dist, 'package.json'), JSON.stringify({type: 'module'}));
     console.log(`Built Luna - Desktop in ${dist}`);

@@ -1,3 +1,5 @@
+import {N_} from '../translatable.js';
+import {_, formatText, initTranslations} from '../i18n.js';
 import {DesktopSettings} from '../settings/settings.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import Adw from 'gi://Adw?version=1';
@@ -16,6 +18,7 @@ import {menu, copyItems, canPaste, pasteInto, properties} from './fileActions.js
 import {wallpaperMenuEntries} from './wallpaper.js';
 
 const [extensionPath, layoutPath] = ARGV;
+initTranslations(extensionPath);
 GLib.set_prgname('org.luna.Desktop');
 const schema = Gio.SettingsSchemaSource.new_from_directory(`${extensionPath}/schemas`, Gio.SettingsSchemaSource.get_default(), false)
     .lookup('org.gnome.shell.extensions.luna-desktop', true);
@@ -52,9 +55,9 @@ function openFile(file, parent) {
     });
 }
 function rename(item, parent) {
-    const dialog = new Gtk.Dialog({title: 'Rename', transient_for: parent, modal: true});
-    dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
-    dialog.add_button('Rename', Gtk.ResponseType.OK);
+    const dialog = new Gtk.Dialog({title: _('Rename'), transient_for: parent, modal: true});
+    dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+    dialog.add_button(_('Rename'), Gtk.ResponseType.OK);
     dialog.set_default_response(Gtk.ResponseType.OK);
     const entry = new Gtk.Entry({text: item.name, activates_default: true, margin_top: 16, margin_bottom: 16, margin_start: 16, margin_end: 16});
     dialog.get_content_area().append(entry);
@@ -92,11 +95,11 @@ function trashItems(items, parent) {
 }
 function trash(item, parent) { trashItems([item], parent); }
 function newFolder(parent) {
-    const dialog = new Gtk.Dialog({title: 'New folder', transient_for: parent, modal: true});
-    dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
-    dialog.add_button('Create', Gtk.ResponseType.OK);
+    const dialog = new Gtk.Dialog({title: _('New folder'), transient_for: parent, modal: true});
+    dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+    dialog.add_button(_('Create'), Gtk.ResponseType.OK);
     dialog.set_default_response(Gtk.ResponseType.OK);
-    const entry = new Gtk.Entry({text: 'New Folder', activates_default: true, margin_top: 16, margin_bottom: 16, margin_start: 16, margin_end: 16});
+    const entry = new Gtk.Entry({text: _('New Folder'), activates_default: true, margin_top: 16, margin_bottom: 16, margin_start: 16, margin_end: 16});
     dialog.get_content_area().append(entry);
     dialog.connect('response', (_d, response) => {
         const name = entry.text.trim();
@@ -197,13 +200,13 @@ function populate() {
                     if (!selected.has(item.file.get_uri())) select([item.file.get_uri()]);
                     const selection = files.filter(file => selected.has(file.file.get_uri()));
                     const ordinary = selection.every(file => !file.special);
-                    const actions = [['Open', () => selection.forEach(file => openFile(file.file, view.window))], null,
-                        ['Cut', () => copyItems(selection, true), ordinary], ['Copy', () => copyItems(selection), ordinary],
-                        ['Rename…', () => rename(item, view.window), ordinary && selection.length === 1],
-                        ['Move to Trash', () => trashItems(selection, view.window), ordinary], null,
-                        ['Properties', () => properties(selection)]];
+                    const actions = [[N_('Open'), () => selection.forEach(file => openFile(file.file, view.window))], null,
+                        [N_('Cut'), () => copyItems(selection, true), ordinary], [N_('Copy'), () => copyItems(selection), ordinary],
+                        [N_('Rename…'), () => rename(item, view.window), ordinary && selection.length === 1],
+                        [N_('Move to Trash'), () => trashItems(selection, view.window), ordinary], null,
+                        [N_('Properties'), () => properties(selection)]];
                     if (item.mount?.can_eject() || item.mount?.can_unmount()) actions.push(null,
-                        [item.mount.can_eject() ? 'Eject' : 'Unmount', () => {
+                        [item.mount.can_eject() ? N_('Eject') : N_('Unmount'), () => {
                             const method = item.mount.can_eject() ? 'eject_with_operation' : 'unmount_with_operation';
                             item.mount[method](Gio.MountUnmountFlags.NONE, new Gtk.MountOperation({parent: view.window}), null, (mount, result) => {
                                 try { mount[`${method}_finish`](result); } catch (e) { error(view.window, e.message); }
@@ -252,12 +255,12 @@ function showEditToolbar() {
     toolbar.add_css_class('desktop-widget');
     toolbar.add_css_class('desktop-editor');
     const description = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 4, margin_end: 12});
-    const title = new Gtk.Label({label: 'Arrange your desktop', xalign: 0});
+    const title = new Gtk.Label({label: _('Arrange your desktop'), xalign: 0});
     title.add_css_class('desktop-editor-title');
-    const hint = new Gtk.Label({label: 'Drag anywhere on a widget · Esc to finish', xalign: 0});
+    const hint = new Gtk.Label({label: _('Drag anywhere on a widget · Esc to finish'), xalign: 0});
     hint.add_css_class('desktop-editor-hint');
     description.append(title); description.append(hint); toolbar.append(description);
-    const add = new Gtk.MenuButton({label: 'Add widget', valign: Gtk.Align.CENTER});
+    const add = new Gtk.MenuButton({label: _('Add widget'), valign: Gtk.Align.CENTER});
     const picker = new Gtk.Popover();
     const list = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 6, margin_top: 8, margin_bottom: 8, margin_start: 8, margin_end: 8});
     const enabled = settings.get_strv('desktop-enabled-widgets');
@@ -266,13 +269,13 @@ function showEditToolbar() {
         const item = new Gtk.Button({sensitive: definition.multiple === true || !present});
         item.add_css_class('flat');
         const labels = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 4});
-        const name = new Gtk.Label({label: definition.name + (present && !definition.multiple ? ' · Added' : ''), xalign: 0});
+        const name = new Gtk.Label({label: present && !definition.multiple ? formatText(_('%s · Added'), definition.name) : definition.name, xalign: 0});
         name.add_css_class('heading'); labels.append(name);
         const detail = new Gtk.Label({label: definition.description || '', xalign: 0, wrap: true, max_width_chars: 40});
         detail.add_css_class('dim-label'); labels.append(detail); item.set_child(labels);
         item.connect('clicked', () => {
             picker.popdown();
-            if (!definition.multiple) { item.sensitive = false; name.label = `${definition.name} · Added`; }
+            if (!definition.multiple) { item.sensitive = false; name.label = formatText(_("%s · Added"), definition.name); }
             const current = settings.get_strv('desktop-enabled-widgets');
             const id = definition.multiple && current.includes(definition.id) ? `${definition.id}:${GLib.uuid_string_random()}` : definition.id;
             settings.set_strv('desktop-enabled-widgets', [...new Set([...current, id])]);
@@ -281,7 +284,7 @@ function showEditToolbar() {
         list.append(item);
     }
     picker.set_child(list); add.set_popover(picker);
-    const done = new Gtk.Button({label: 'Done', valign: Gtk.Align.CENTER});
+    const done = new Gtk.Button({label: _('Done'), valign: Gtk.Align.CENTER});
     done.add_css_class('suggested-action');
     done.connect('clicked', () => { editingDesktop = false; populate(); });
     toolbar.append(add); toolbar.append(done);
@@ -481,8 +484,8 @@ function refresh(arrange = false) {
                     found.sort((a, b) => (order === 'size' ? b.size - a.size : order === 'modified' ? b.modified - a.modified :
                         order === 'type' ? a.type.localeCompare(b.type) : 0) || a.name.localeCompare(b.name));
                     const special = [];
-                    if (settings.get_boolean('desktop-show-home')) special.push({file: Gio.File.new_for_path(GLib.get_home_dir()), name: 'Home', icon: Gio.ThemedIcon.new('user-home'), special: true});
-                    if (settings.get_boolean('desktop-show-trash')) special.push({file: Gio.File.new_for_uri('trash:///'), name: 'Trash', icon: Gio.ThemedIcon.new('user-trash'), special: true});
+                    if (settings.get_boolean('desktop-show-home')) special.push({file: Gio.File.new_for_path(GLib.get_home_dir()), name: _('Home'), icon: Gio.ThemedIcon.new('user-home'), special: true});
+                    if (settings.get_boolean('desktop-show-trash')) special.push({file: Gio.File.new_for_uri('trash:///'), name: _('Trash'), icon: Gio.ThemedIcon.new('user-trash'), special: true});
                     const drives = volumes.get_mounts().filter(mount => {
                         if (mount.is_shadowed()) return false;
                         const native = mount.get_root().is_native();
@@ -539,22 +542,22 @@ function geometry() {
             const picked = fixed.pick(x, y, Gtk.PickFlags.DEFAULT);
             if (picked !== fixed) return;
             menu(fixed, x, y, [
-                [editingDesktop ? 'Finish Editing' : 'Edit Desktop', () => { editingDesktop = !editingDesktop; populate(); }], null,
-                ['New Folder…', () => newFolder(window)],
-                ['Paste', () => pasteInto(directory).then(refresh).catch(e => error(window, e.message)), canPaste()], null,
-                ['Select All', () => select(files.map(item => item.file.get_uri()))],
-                ['Arrange Icons', () => { settings.set_string('desktop-icon-positions', '{}'); populate(); }],
-                ['Sort By', ['Name', 'Type', 'Modified', 'Size'].map(label => [label, () => {
+                [editingDesktop ? N_('Finish Editing') : N_('Edit Desktop'), () => { editingDesktop = !editingDesktop; populate(); }], null,
+                [N_('New Folder…'), () => newFolder(window)],
+                [N_('Paste'), () => pasteInto(directory).then(refresh).catch(e => error(window, e.message)), canPaste()], null,
+                [N_('Select All'), () => select(files.map(item => item.file.get_uri()))],
+                [N_('Arrange Icons'), () => { settings.set_string('desktop-icon-positions', '{}'); populate(); }],
+                [N_('Sort By'), [N_('Name'), N_('Type'), N_('Modified'), N_('Size')].map(label => [label, () => {
                     settings.set_string('desktop-sort-order', label.toLowerCase()); refresh(true);
                 }])],
-                ['Layout', [
-                    [settings.get_boolean('desktop-snap-to-grid') ? 'Turn Off Grid Snapping' : 'Snap to Grid', () => settings.set_boolean('desktop-snap-to-grid', !settings.get_boolean('desktop-snap-to-grid'))],
-                    [settings.get_boolean('desktop-show-hidden') ? 'Hide Hidden Files' : 'Show Hidden Files', () => settings.set_boolean('desktop-show-hidden', !settings.get_boolean('desktop-show-hidden'))],
-                    [settings.get_boolean('desktop-widgets-enabled') ? 'Hide Widgets' : 'Show Widgets', () => settings.set_boolean('desktop-widgets-enabled', !settings.get_boolean('desktop-widgets-enabled'))],
+                [N_('Layout'), [
+                    [settings.get_boolean('desktop-snap-to-grid') ? N_('Turn Off Grid Snapping') : N_('Snap to Grid'), () => settings.set_boolean('desktop-snap-to-grid', !settings.get_boolean('desktop-snap-to-grid'))],
+                    [settings.get_boolean('desktop-show-hidden') ? N_('Hide Hidden Files') : N_('Show Hidden Files'), () => settings.set_boolean('desktop-show-hidden', !settings.get_boolean('desktop-show-hidden'))],
+                    [settings.get_boolean('desktop-widgets-enabled') ? N_('Hide Widgets') : N_('Show Widgets'), () => settings.set_boolean('desktop-widgets-enabled', !settings.get_boolean('desktop-widgets-enabled'))],
                 ]], null,
-                ['Open Desktop in Files', () => openFile(directory, window)],
+                [N_('Open Desktop in Files'), () => openFile(directory, window)],
                 ...wallpaperMenuEntries(() => layouts.find(layout => layout.wallpaperPath)?.wallpaperPath, message => error(window, message)),
-                ['Desktop Settings', () => Gio.Subprocess.new(['gnome-extensions', 'prefs', 'luna-desktop@wuild'], Gio.SubprocessFlags.NONE)],
+                [N_('Desktop Settings'), () => Gio.Subprocess.new(['gnome-extensions', 'prefs', 'luna-desktop@wuild'], Gio.SubprocessFlags.NONE)],
             ]);
         });
         fixed.add_controller(click);

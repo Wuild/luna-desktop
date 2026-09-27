@@ -1,3 +1,4 @@
+import {_} from '../../../i18n.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import GLib from 'gi://GLib';
 import Gdk from 'gi://Gdk?version=4.0';
@@ -12,16 +13,16 @@ export function create(context) {
     const header = new Gtk.Box({spacing: 6, cursor: Gdk.Cursor.new_from_name('grab', null)});
     const grip = new Gtk.Image({icon_name: 'list-drag-handle-symbolic', pixel_size: 14});
     header.append(grip);
-    header.tooltip_text = 'Drag to move note';
+    header.tooltip_text = _('Drag to move note');
     context.registerDragHandle?.(header);
-    const title = new Gtk.Label({label: String(options.title ?? 'Note'), xalign: {left: 0, center: 0.5, right: 1}[options.alignment] ?? 0});
+    const title = new Gtk.Label({label: String(options.title ?? _('Note')), xalign: {left: 0, center: 0.5, right: 1}[options.alignment] ?? 0});
     title.add_css_class('heading'); title.visible = options.showTitle !== false; title.hexpand = true;
     header.append(title);
-    const configure = new Gtk.Button({icon_name: 'emblem-system-symbolic', tooltip_text: 'Note color, size, and appearance'});
+    const configure = new Gtk.Button({icon_name: 'emblem-system-symbolic', tooltip_text: _('Note color, size, and appearance')});
     configure.add_css_class('flat'); configure.connect('clicked', () => context.configure?.());
-    const done = new Gtk.Button({icon_name: 'object-select-symbolic', tooltip_text: 'Finish typing (Escape)'});
+    const done = new Gtk.Button({icon_name: 'object-select-symbolic', tooltip_text: _('Finish typing (Escape)')});
     done.add_css_class('flat');
-    const remove = new Gtk.Button({icon_name: 'user-trash-symbolic', tooltip_text: 'Remove note'});
+    const remove = new Gtk.Button({icon_name: 'user-trash-symbolic', tooltip_text: _('Remove note')});
     remove.add_css_class('flat'); remove.connect('clicked', () => context.remove?.());
     header.append(done); header.append(configure); header.append(remove);
     const hover = new Gtk.EventControllerMotion();
@@ -47,12 +48,12 @@ export function create(context) {
     const styleButtons = [];
     let changed = () => {};
     for (const [style, name] of [['bold', 'format-text-bold-symbolic'], ['italic', 'format-text-italic-symbolic'], ['underline', 'format-text-underline-symbolic']]) {
-        const button = new Gtk.Button({icon_name: name, tooltip_text: `Select text to make it ${style}`, focusable: false});
+        const button = new Gtk.Button({icon_name: name, tooltip_text: {bold: _('Make selected text bold'), italic: _('Make selected text italic'), underline: _('Underline selected text')}[style], focusable: false});
         button.add_css_class('flat');
         button.connect('clicked', () => { if (rich.toggle(style)) changed(); text.grab_focus(); });
         formatting.append(button); styleButtons.push(button);
     }
-    text.tooltip_text = 'Click to write a note; Escape to finish';
+    text.tooltip_text = _('Click to write a note; Escape to finish');
     let editingText = false;
     const finish = () => { editingText = false; updateFocus(false); text.get_root()?.set_focus(null); };
     done.connect('clicked', finish);
@@ -118,7 +119,7 @@ export function create(context) {
     const scroll = new Gtk.ScrolledWindow({hscrollbar_policy: Gtk.PolicyType.NEVER, vscrollbar_policy: Gtk.PolicyType.AUTOMATIC, vexpand: true});
     scroll.set_child(text); box.append(header); box.append(scroll);
     const resize = new Gtk.DrawingArea({halign: Gtk.Align.END, valign: Gtk.Align.END, width_request: 18, height_request: 18,
-        cursor: Gdk.Cursor.new_from_name('se-resize', null), tooltip_text: 'Drag to resize note'});
+        cursor: Gdk.Cursor.new_from_name('se-resize', null), tooltip_text: _('Drag to resize note')});
     resize.set_draw_func((_area, cr, width, height) => {
         cr.setSourceRGBA(0, 0, 0, 0.2);
         cr.moveTo(width, 0); cr.lineTo(width, height); cr.lineTo(0, height); cr.closePath(); cr.fill();

@@ -8,7 +8,7 @@ pnpm build
 cd dist
 native_args=()
 if [[ ${LUNA_PACKAGE_NATIVE:-0} == 1 && -d native ]]; then native_args+=(--extra-source=native); fi
-gnome-extensions pack "${native_args[@]}" --extra-source=LICENSE --extra-source=LICENSE-NOTICE --force --out-dir "$out_dir" --extra-source=desktop --extra-source=icons --extra-source=widgets --extra-source=shell --extra-source=settings --extra-source=preferences .
+gnome-extensions pack --podir=../po --extra-source=i18n.js --extra-source=translatable.js "${native_args[@]}" --extra-source=LICENSE --extra-source=LICENSE-NOTICE --force --out-dir "$out_dir" --extra-source=desktop --extra-source=icons --extra-source=widgets --extra-source=shell --extra-source=settings --extra-source=preferences .
 
 if [[ ${LUNA_PACKAGE_NATIVE:-0} != 1 ]]; then
     python3 ../scripts/check-package.py "$out_dir/luna-desktop@wuild.shell-extension.zip"

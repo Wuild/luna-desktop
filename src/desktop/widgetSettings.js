@@ -1,3 +1,5 @@
+import {N_} from '../translatable.js';
+import {_, formatText} from '../i18n.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import Adw from 'gi://Adw?version=1';
 import Gdk from 'gi://Gdk?version=4.0';
@@ -33,17 +35,17 @@ export function customizeWidget(parent, settings, definition) {
         const encoded = JSON.stringify(all);
         if (encoded !== settings.get_string('desktop-widget-options')) settings.set_string('desktop-widget-options', encoded);
     };
-    const dialog = new Gtk.Dialog({title: `Customize ${definition.name}`, transient_for: parent, modal: true, default_width: 580, default_height: 560});
-    dialog.add_button('Done', Gtk.ResponseType.OK);
+    const dialog = new Gtk.Dialog({title: formatText(_("Customize %s"), definition.name), transient_for: parent, modal: true, default_width: 580, default_height: 560});
+    dialog.add_button(_('Done'), Gtk.ResponseType.OK);
     const fields = [
-        {key: 'width', label: 'Width', type: 'number', min: 120, max: 600},
-        {key: 'height', label: (definition.settings ?? []).some(field => field.key === 'autoHeight') ? 'Fixed height' : 'Height', type: 'number', min: 80, max: 600},
-        {key: 'opacity', label: 'Widget opacity (%)', type: 'number', min: 10, max: 100},
-        {key: 'background', label: 'Show background', type: 'boolean'},
-        {key: 'backgroundColor', label: 'Background color', type: 'color'},
-        {key: 'backgroundOpacity', label: 'Background opacity (%)', type: 'number', min: 0, max: 100},
-        {key: 'cornerRadius', label: 'Corner radius', type: 'number', min: 0, max: 48},
-        ...(definition.interactive === true ? [{key: 'interactive', label: 'Allow hover and button controls', type: 'boolean'}] : []),
+        {key: 'width', label: _('Width'), type: 'number', min: 120, max: 600},
+        {key: 'height', label: (definition.settings ?? []).some(field => field.key === 'autoHeight') ? _('Fixed height') : _('Height'), type: 'number', min: 80, max: 600},
+        {key: 'opacity', label: _('Widget opacity (%)'), type: 'number', min: 10, max: 100},
+        {key: 'background', label: _('Show background'), type: 'boolean'},
+        {key: 'backgroundColor', label: _('Background color'), type: 'color'},
+        {key: 'backgroundOpacity', label: _('Background opacity (%)'), type: 'number', min: 0, max: 100},
+        {key: 'cornerRadius', label: _('Corner radius'), type: 'number', min: 0, max: 48},
+        ...(definition.interactive === true ? [{key: 'interactive', label: _('Allow hover and button controls'), type: 'boolean'}] : []),
         ...(definition.settings ?? []),
     ];
     const box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 12, margin_top: 12, margin_bottom: 12, margin_start: 12, margin_end: 12});
@@ -52,14 +54,14 @@ export function customizeWidget(parent, settings, definition) {
     box.append(switcher); box.append(stack);
     const groups = new Map();
     for (const [name, description] of [
-        ['Content', 'Choose what this widget shows.'],
-        ['Appearance', 'Colors, text, and background.'],
-        ['Layout', 'Size and arrangement on your desktop.'],
-        ['Advanced', 'Optional behavior and fine-tuning.'],
+        [N_('Content'), N_('Choose what this widget shows.')],
+        [N_('Appearance'), N_('Colors, text, and background.')],
+        [N_('Layout'), N_('Size and arrangement on your desktop.')],
+        [N_('Advanced'), N_('Optional behavior and fine-tuning.')],
     ]) {
         const page = new Adw.PreferencesPage();
-        const group = new Adw.PreferencesGroup({title: name, description});
-        page.add(group); stack.add_titled(page, name, name); groups.set(name, group);
+        const group = new Adw.PreferencesGroup({title: _(name), description: _(description)});
+        page.add(group); stack.add_titled(page, name, _(name)); groups.set(name, group);
     }
     const category = field => {
         if (field.category && groups.has(field.category)) return field.category;

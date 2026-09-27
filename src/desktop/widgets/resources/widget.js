@@ -1,10 +1,13 @@
+import GLib from 'gi://GLib';
+import {N_} from '../../../translatable.js';
+import {_} from '../../../i18n.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import Cairo from 'cairo';
 import {ResourceSampler} from './metrics.js';
 import {concentricGeometry} from './rings.js';
 import {applyTextStyle} from '../textStyle.js';
 
-const NAMES = {cpu: 'CPU', gpu: 'GPU', memory: 'MEM', swap: 'SWAP', disk: 'DISK', download: 'DOWN', upload: 'UP', battery: 'BAT'};
+const NAMES = {cpu: N_('CPU'), gpu: N_('GPU'), memory: N_('MEM'), swap: N_('SWAP'), disk: N_('DISK'), download: N_('DOWN'), upload: N_('UP'), battery: N_('BAT')};
 const safeColor = value => /^#[0-9a-f]{6}$/i.test(value) ? value : '#80bfff';
 const rgb = value => [1, 3, 5].map(offset => parseInt(safeColor(value).slice(offset, offset + 2), 16) / 255);
 const isRate = metric => metric === 'download' || metric === 'upload';
@@ -17,7 +20,7 @@ export function create(context) {
     const shadowAlpha = Math.max(0.1, Math.min(1, Number(options.shadowStrength ?? 80) / 100));
     const thickness = Math.max(2, Math.min(18, Number(options.thickness) || 6));
     const metrics = Object.keys(NAMES).filter(metric => options[`show${metric[0].toUpperCase()}${metric.slice(1)}`] ?? ['cpu', 'gpu', 'memory'].includes(metric));
-    if (!metrics.length) return new Gtk.Label({label: context.editing ? 'Choose rings in Customize' : ''});
+    if (!metrics.length) return new Gtk.Label({label: context.editing ? _('Choose rings in Customize') : ''});
     const concentric = options.layout === 'single';
     const degrees = {full: 360, 'three-quarter': 270, half: 180, quarter: 90}[options.arc] ?? Math.max(30, Math.min(360, Number(options.arcDegrees) || 270));
     const sweep = degrees * Math.PI / 180;
@@ -72,14 +75,14 @@ export function create(context) {
             drawing.set_draw_func((_area, cr, width, height) => drawRing(cr, width, height, metric, Math.max(1, Math.min(width, height) / 2 - thickness / 2 - 2), thickness));
             drawings.push(drawing); overlay.set_child(drawing); overlay.add_overlay(label); column.append(overlay);
             if (options.showLabels !== false) {
-                const title = new Gtk.Label({label: NAMES[metric]}); applyTextStyle(title, options); column.append(title);
+                const title = new Gtk.Label({label: _(NAMES[metric])}); applyTextStyle(title, options); column.append(title);
             }
             content.insert(column, -1);
         }
     }
     const updateLabels = () => labels.forEach(({label, metric, legend}) => {
         const text = format(metric, values[metric]);
-        if (legend) label.set_markup(`<span foreground="${safeColor(options[`${metric}Color`])}">●</span> ${options.showLabels !== false ? NAMES[metric] : ''}${options.showLabels !== false && options.showValues !== false ? '  ' : ''}${options.showValues !== false ? text : ''}`);
+        if (legend) label.set_markup(`<span foreground="${safeColor(options[`${metric}Color`])}">●</span> ${options.showLabels !== false ? GLib.markup_escape_text(_(NAMES[metric]), -1) : ''}${options.showLabels !== false && options.showValues !== false ? '  ' : ''}${options.showValues !== false ? text : ''}`);
         else {
             const textSize = Math.max(9, Math.min(size * 0.21, (size - thickness * 2 - 14) / (text.length * 0.6)));
             label.set_markup(`<span size="${Math.round(textSize * 1024)}" weight="bold">${text}</span>`);

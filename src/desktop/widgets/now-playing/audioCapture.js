@@ -1,3 +1,4 @@
+import {_} from '../../../i18n.js';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import {RATE, SIZE, chooseStream, latestWindow, levels} from './spectrum.js';
@@ -54,11 +55,11 @@ export class AudioCapture {
             const key = JSON.stringify(source);
             if (key !== this.sourceKey) { this.stopCapture(); this.sourceKey = key; }
             if (source && !this.process) this.startCapture(...source);
-            else if (!source) this.onStatus('Waiting for selected app audio');
+            else if (!source) this.onStatus(_('Waiting for selected app audio'));
         } catch {
             if (!this.disposed) {
                 this.stopCapture();
-                this.onStatus('Audio server unavailable (requires PulseAudio or PipeWire PulseAudio support)');
+                this.onStatus(_('Audio server unavailable (requires PulseAudio or PipeWire PulseAudio support)'));
             }
         } finally { this.busy = false; }
     }
@@ -69,12 +70,12 @@ export class AudioCapture {
             '--client-name=LunaDesktop Visualizer', '--stream-name=Selected player spectrum'],
         Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE);
         const stream = process.get_stdout_pipe();
-        this.onStatus('Live spectrum of the selected app');
+        this.onStatus(_('Live spectrum of the selected app'));
         const read = () => stream.read_bytes_async(65536, GLib.PRIORITY_DEFAULT, this.cancel, (input, result) => {
             try {
                 const chunk = input.read_bytes_finish(result).get_data();
                 if (this.disposed || ticket !== this.generation) return;
-                if (!chunk.length) { this.stopCapture(); this.onStatus('Player audio capture stopped; retrying'); return; }
+                if (!chunk.length) { this.stopCapture(); this.onStatus(_('Player audio capture stopped; retrying')); return; }
                 const buffer = new Uint8Array(this.buffer.length + chunk.length);
                 buffer.set(this.buffer); buffer.set(chunk, this.buffer.length);
                 const now = GLib.get_monotonic_time() / 1e6;

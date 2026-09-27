@@ -13,7 +13,9 @@
     "test:shell": "pnpm build && bash scripts/test-shell.sh",
     "test:tiling": "pnpm build && bash scripts/test-shell.sh \"$PWD/tests/snapping-shell-smoke.js\"",
     "build:native": "python3 scripts/build-native.py",
-    "pack:local": "LUNA_PACKAGE_NATIVE=1 bash scripts/package.sh /tmp/luna-desktop-local-build"
+    "pack:local": "LUNA_PACKAGE_NATIVE=1 bash scripts/package.sh /tmp/luna-desktop-local-build",
+    "translations:update": "python3 scripts/translations.py update",
+    "translations:check": "python3 scripts/translations.py check"
   },
   "devDependencies": {
     "@girs/adw-1": "^4.9.0",

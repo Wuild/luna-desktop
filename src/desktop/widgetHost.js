@@ -1,3 +1,4 @@
+import {_, formatText} from '../i18n.js';
 import Gtk from 'gi://Gtk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -96,10 +97,10 @@ export class WidgetHost {
                 const storage = Gio.File.new_for_path(`${GLib.get_user_data_dir()}/luna-desktop/widget-state/${definition.id}.json`);
                 const context = Object.freeze({
                     remove: () => {
-                        const dialog = new Gtk.Dialog({title: 'Remove note?', transient_for: view.window, modal: true});
-                        dialog.get_content_area().append(new Gtk.Label({label: 'Remove this note from the desktop?', margin_top: 20, margin_bottom: 20, margin_start: 20, margin_end: 20}));
-                        dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
-                        dialog.add_button('Remove', Gtk.ResponseType.OK).add_css_class('destructive-action');
+                        const dialog = new Gtk.Dialog({title: _('Remove note?'), transient_for: view.window, modal: true});
+                        dialog.get_content_area().append(new Gtk.Label({label: _('Remove this note from the desktop?'), margin_top: 20, margin_bottom: 20, margin_start: 20, margin_end: 20}));
+                        dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+                        dialog.add_button(_('Remove'), Gtk.ResponseType.OK).add_css_class('destructive-action');
                         dialog.set_default_response(Gtk.ResponseType.CANCEL);
                         dialog.connect('response', (_d, response) => {
                             dialog.destroy();
@@ -136,10 +137,10 @@ export class WidgetHost {
                 const header = new Gtk.Box({spacing: 8, valign: Gtk.Align.START, halign: Gtk.Align.FILL});
                 header.add_css_class('desktop-widget-header');
                 header.append(new Gtk.Label({label: definition.name, xalign: 0, hexpand: true}));
-                const remove = new Gtk.Button({icon_name: 'user-trash-symbolic', tooltip_text: 'Remove widget'});
+                const remove = new Gtk.Button({icon_name: 'user-trash-symbolic', tooltip_text: _('Remove widget')});
                 remove.add_css_class('flat');
                 remove.connect('clicked', () => this.settings.set_strv('desktop-enabled-widgets', this.settings.get_strv('desktop-enabled-widgets').filter(id => id !== definition.id)));
-                const configure = new Gtk.Button({icon_name: 'emblem-system-symbolic', tooltip_text: 'Customize widget'});
+                const configure = new Gtk.Button({icon_name: 'emblem-system-symbolic', tooltip_text: _('Customize widget')});
                 configure.add_css_class('flat');
                 configure.connect('clicked', () => customizeWidget(view.window, this.settings, definition));
                 header.append(configure); header.append(remove);
@@ -321,7 +322,7 @@ export class WidgetHost {
             } catch (e) {
                 console.error(`Widget ${definition.id}: ${e.message}`);
                 if (generation !== this.generation) return;
-                card.set_child(new Gtk.Label({label: `${definition.name} could not load`, wrap: true}));
+                card.set_child(new Gtk.Label({label: formatText(_("%s could not load"), definition.name), wrap: true}));
                 view.fixed.put(card, 16, 16);
                 const first = view.fixed.get_first_child();
                 if (first !== card) card.insert_before(view.fixed, first);

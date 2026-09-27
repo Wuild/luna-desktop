@@ -1,3 +1,4 @@
+import {_, ngettext, formatText} from '../i18n.js';
 import Gio from 'gi://Gio';
 import Clutter from 'gi://Clutter';
 import Shell from 'gi://Shell';
@@ -24,7 +25,7 @@ export function windowPreviewCard(window, preview, width, groupSize = 0) {
     const card = new St.BoxLayout({orientation: Clutter.Orientation.VERTICAL, width,
         style: 'background-color: rgba(245,245,245,0.94); color: #202020; border-radius: 4px; spacing: 0;'});
     watchStyle(card, () => card.set_style(`background-color: ${darkStyle() ? 'rgba(42,42,46,0.96)' : 'rgba(245,245,245,0.94)'}; color: ${darkStyle() ? '#f5f5f5' : '#202020'}; border-radius: 4px; spacing: 0;`));
-    const title = groupSize ? `Snap group · ${groupSize} windows` : window.get_title() || 'Window';
+    const title = groupSize ? formatText(ngettext('Snap group · %d window', 'Snap group · %d windows', groupSize), groupSize) : window.get_title() || _('Window');
     const header = new St.BoxLayout({style: 'spacing: 8px; padding: 10px;'});
     const app = Shell.WindowTracker.get_default().get_window_app(window);
     const icon = groupSize ? new St.Icon({icon_name: 'view-grid-symbolic', icon_size: 20}) : app?.create_icon_texture(20);

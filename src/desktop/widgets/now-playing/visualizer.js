@@ -1,3 +1,4 @@
+import {_} from '../../../i18n.js';
 import Cairo from 'cairo';
 import Gtk from 'gi://Gtk?version=4.0';
 import {AudioCapture} from './audioCapture.js';
@@ -37,7 +38,7 @@ export function visualizer(context) {
     const start = player => {
         if (capture || disposed) return;
         if (!GLib.find_program_in_path('pactl') || !GLib.find_program_in_path('parec')) {
-            area.tooltip_text = 'Audio visualizer requires pactl and parec'; return;
+            area.tooltip_text = _('Audio visualizer requires pactl and parec'); return;
         }
         capture = new AudioCapture(player, count,
             Math.max(25, Math.min(300, Number(options.visualizerSensitivity) || 100)) / 100, updateRate,

@@ -6,5 +6,6 @@
     "50"
   ],
   "settings-schema": "org.gnome.shell.extensions.luna-desktop",
-  "url": "https://github.com/Wuild/luna-desktop"
+  "url": "https://github.com/Wuild/luna-desktop",
+  "gettext-domain": "luna-desktop"
 }
