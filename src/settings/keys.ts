@@ -42,6 +42,7 @@ export interface SettingsValues {
     "desktop-switcher-color-override": boolean;
     "desktop-switcher-color": string;
     "desktop-switcher-width-percent": number;
+    "desktop-switcher-primary-monitor": boolean;
     "desktop-snap-switcher-enabled": boolean;
     "desktop-snap-enabled": boolean;
     "desktop-snap-bar-enabled": boolean;
@@ -253,6 +254,9 @@ export const settingDefinitions = {
             40,
             95
         ]
+    },
+    "desktop-switcher-primary-monitor": {
+        "type": "b"
     },
     "desktop-snap-switcher-enabled": {
         "type": "b"

@@ -62,7 +62,9 @@ const LunaSwitcherPopup = GObject.registerClass(class LunaSwitcherPopup extends 
     _init(owner, entries) {
         super._init(entries);
         this.owner = owner;
-        this.monitor = Main.layoutManager.currentMonitor ?? Main.layoutManager.primaryMonitor;
+        this.monitor = owner.snapping.settings.get_boolean('desktop-switcher-primary-monitor')
+            ? (Main.layoutManager.primaryMonitor ?? Main.layoutManager.currentMonitor)
+            : (Main.layoutManager.currentMonitor ?? Main.layoutManager.primaryMonitor);
         this.backdrop = new St.Widget();
         this.blur = bindSwitcherSurface(owner.snapping.settings, this.backdrop);
         this.add_child(this.backdrop);

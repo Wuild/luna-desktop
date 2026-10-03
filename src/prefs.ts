@@ -35,6 +35,7 @@ export default class LunaDesktopPreferences extends ExtensionPreferences {
         const switcherPage = new Adw.PreferencesPage({title: _('App switcher'), icon_name: 'focus-windows-symbolic'});
         const switcher = context.group(switcherPage, _('App switcher'), _('Switch between individual windows and snap groups in one view.'));
         context.toggle(switcher, 'desktop-snap-switcher-enabled', _('Luna Alt+Tab switcher'), _('Show windows and snap groups together. Selecting a group brings all its windows forward.'));
+        context.toggle(switcher, 'desktop-switcher-primary-monitor', _('Open on primary monitor'), _('Show Alt+Tab on the primary display. Turn off to use the current monitor.'));
         context.spin(switcher, 'desktop-switcher-width-percent', _('Maximum panel width'), _('Percentage of the monitor width. Cards wrap into rows at this limit.'), 'desktop-snap-switcher-enabled');
         const switcherAppearance = context.group(switcherPage, _('Appearance'), _('Shared with the snap layout bar. Defaults match Luna Taskbar panels, menus and window previews.'));
         context.toggle(switcherAppearance, 'desktop-switcher-color-override', _('Override theme color'));

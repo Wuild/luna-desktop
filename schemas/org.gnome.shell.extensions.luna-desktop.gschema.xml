@@ -163,6 +163,7 @@
     <key name="desktop-switcher-color-override" type="b"><default>false</default><summary>Override app switcher background color</summary></key>
     <key name="desktop-switcher-color" type="s"><default>'#26201e'</default><summary>App switcher background color</summary></key>
     <key name="desktop-switcher-width-percent" type="i"><default>80</default><range min="40" max="95"/><summary>Maximum app switcher width as a percentage of the monitor</summary></key>
+    <key name="desktop-switcher-primary-monitor" type="b"><default>true</default><summary>Open the app switcher on the primary monitor</summary></key>
     <key name="desktop-snap-switcher-enabled" type="b"><default>true</default><summary>Use the Luna window and snap group switcher</summary></key>
     <key name="desktop-snap-enabled" type="b"><default>true</default><summary>Enable window tiling</summary></key>
     <key name="desktop-snap-bar-enabled" type="b"><default>true</default><summary>Show layouts at the top while dragging</summary></key>
